@@ -90,9 +90,11 @@ nav {
     min-width: 100%;
 }
 
-nav a {
+nav a,
+#high-scores-link {
+    width: 100%;
     text-decoration: none;
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: bold;
     padding: 1rem;
     background-color: var(--dark-cyan);
@@ -100,9 +102,23 @@ nav a {
     border-bottom: 1px solid var(--black-and-blue);
 }
 
-nav a:hover {
+nav a:hover,
+#high-scores-link:hover {
     background-color: var(--lght-cyan);
     color: var(--black-and-blue);
+}
+
+.timer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;   
+    padding: 1rem;
+
+    font-size: 2.5rem;   
+    background-color: var(--lght-cyan);
+    color: var(--black-and-blue);
+    border-bottom: 1px solid var(--black-and-blue);
 }
 
 
@@ -110,6 +126,16 @@ nav a:hover {
 @media screen and (min-width: 992px) {
     header {
         flex-direction: row;
+        justify-content: space-between;
+    }
+    /* header h1{
+        background-color: var(--pale-cyan); 
+    }
+    header h3{
+        background-color: var(--pale-cyan);
+    } */
+    nav {
+        background-color: var(--pale-cyan);
     }
     nav {
         flex-direction: row;
@@ -118,10 +144,13 @@ nav a:hover {
         padding: 1rem;
         margin-right: 2rem;
     }
-    nav a {
+    nav a,
+    #high-scores-link {
         border-radius: 25px;
         width: 200px;
-
     }
-    
+    .timer {
+        align-items: flex-end;
+    }
+  
 }
