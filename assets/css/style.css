@@ -104,3 +104,24 @@ nav a:hover {
     background-color: var(--lght-cyan);
     color: var(--black-and-blue);
 }
+
+
+/* Responsive Design for Large Screens  */
+@media screen and (min-width: 992px) {
+    header {
+        flex-direction: row;
+    }
+    nav {
+        flex-direction: row;
+        justify-content: right;
+        min-width: 450px;
+        padding: 1rem;
+        margin-right: 2rem;
+    }
+    nav a {
+        border-radius: 25px;
+        width: 200px;
+
+    }
+    
+}
