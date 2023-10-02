@@ -1,0 +1,10 @@
+/* Color schemes sourced from https://visme.co/blog/website-color-schemes/ */
+
+:root{
+    --black-and-blue: #17252A;
+    --dark-cyan: #2B7A78;
+    --modr-cyan: #3AAFA9;
+    --lght-cyan: rgb(222, 242, 241);
+    /* --lght-cyan: #b2d8d6; */
+    --pale-cyan: #FEFFFF;
+}
