@@ -1,3 +1,6 @@
+/* Mobile-first Layout  */
+
+
 /* Color schemes sourced from https://visme.co/blog/website-color-schemes/ */
 :root{
     --black-and-blue: #17252A;
@@ -21,7 +24,8 @@ body {
     font-size: 1.75rem;
     line-height: 1.5;
     color: var(--pale-cyan);
-    background-color: var(--black-and-blue);
+    /* background-color: var(--black-and-blue); */
+    background-color: var(--pale-cyan);
 }
 
 h1,
@@ -38,7 +42,7 @@ h6 {
   
 h1 {
     /* 4rem = 40px (4 * 10px) */
-    font-size: 4rem;
+    font-size: 5rem;
 }
   
 h2 {
@@ -64,4 +68,39 @@ h6 {
 p {
     font-size: 2rem;
     margin-bottom: 1rem;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    background-color: var(--black-and-blue);
+}
+
+header h1 {
+    padding: 2.5rem;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 100%;
+}
+
+nav a {
+    text-decoration: none;
+    font-size: 3rem;
+    font-weight: bold;
+    padding: 1rem;
+    background-color: var(--dark-cyan);
+    color: var(--pale-cyan);
+    border-bottom: 1px solid var(--black-and-blue);
+}
+
+nav a:hover {
+    background-color: var(--lght-cyan);
+    color: var(--black-and-blue);
 }
