@@ -121,6 +121,15 @@ nav a:hover,
     border-bottom: 1px solid var(--black-and-blue);
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--lght-cyan);
+    width: 75%;
+    justify-content: center;
+
+}
+
 
 /* Responsive Design for Large Screens  */
 @media screen and (min-width: 992px) {
