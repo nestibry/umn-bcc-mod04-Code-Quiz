@@ -224,5 +224,17 @@ button:hover {
         align-items: center;
         justify-content: center;
     }
+    main h2 {
+        font-size: 3rem;
+    }
+    button {
+        font-size: 2.25rem;
+        padding: 2rem;
+    }
+    #icon {
+        margin-top: 1rem;
+        font-size: 100px;
+    }
+    
   
 }
