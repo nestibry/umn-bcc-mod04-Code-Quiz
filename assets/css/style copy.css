@@ -1,0 +1,246 @@
+/* Mobile-first Layout  */
+
+
+/* Color schemes sourced from https://visme.co/blog/website-color-schemes/ */
+:root{
+    --black-and-blue: #17252A;
+    --dark-cyan: #2B7A78;
+    --modr-cyan: #3AAFA9;
+    --lght-cyan: rgb(222, 242, 241);
+    /* --lght-cyan: #b2d8d6; */
+    --pale-cyan: #FEFFFF;
+}
+
+html {
+    /* set 1rem to 10px instead of native 16px to make it easier to calculate font-size values for the rest of the page (e.g. 1.6rem is 16px, 2.0rem is 20px, etc.) */
+    font-size: 62.5%;
+}
+
+body {
+    /* Sans Serif font stack is implemented to help select the best font for each type of computer operating system */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  
+    /* set body font size to 1.75rem, which is 1.75x more than the font-size of 10px, making it 17.5px  */
+    font-size: 1.75rem;
+    line-height: 1.5;
+    color: var(--pale-cyan);
+    /* background-color: var(--black-and-blue); */
+    
+    /* Mobile-first Layout  */
+    background-color: var(--pale-cyan);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-bottom: 0.625rem;
+    /* color: var(--lght-cyan); */
+    font-weight: 700;
+    line-height: 1.1;
+}
+  
+h1 {
+    /* 4rem = 40px (4 * 10px) */
+    font-size: 5rem;
+}
+  
+h2 {
+    font-size: 3.5rem;
+}
+
+h3 {
+    font-size: 3rem;
+}
+
+h4 {
+    font-size: 2.5rem;
+}
+
+h5 {
+    font-size: 2rem;
+}
+
+h6 {
+    font-size: 1.5rem;
+}
+
+p {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    background-color: var(--black-and-blue);
+}
+
+header h1 {
+    padding: 1.5rem;
+    color: var(--pale-cyan);
+    font-size: 4rem;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* min-width: 100%; */
+}
+
+nav a,
+#high-scores-link {
+    width: 100%;
+    text-decoration: none;
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 1rem;
+    background-color: var(--dark-cyan);
+    color: var(--pale-cyan);
+    border-bottom: 1px solid var(--black-and-blue);
+}
+
+nav a:hover,
+#high-scores-link:hover {
+    background-color: var(--lght-cyan);
+    color: var(--black-and-blue);
+}
+
+.timer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;   
+    padding: 1rem;
+    text-align: center;
+    font-size: 2rem;   
+    background-color: var(--lght-cyan);
+    color: var(--black-and-blue);
+    border-bottom: 1px solid var(--black-and-blue);
+}
+
+main {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    /* background-color: var(--lght-cyan);  */
+
+    /* Mobile-first layout  */
+    margin: 3rem;
+    /* min-width: 80%; */
+}
+
+main h2 {
+    width: 100%;
+    color: var(--black-and-blue);
+    /* background-color: var(--modr-cyan); */
+    text-align: start;
+    font-size: 2rem;
+    margin-bottom: 2rem;    
+}
+.buttons {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    color: var(--black-and-blue);
+    /* background-color: var(--modr-cyan); */
+    /* align-items: center; */
+    text-align: start;
+    font-size: 1.75rem;
+}
+button {
+    text-align: left;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    color: var(--pale-cyan);
+    background-color: var(--dark-cyan);
+    border-radius: 10px;
+    border: none;
+}
+
+button:hover {
+    background-color: var(--black-and-blue);
+    color: var(--pale-cyan);
+}
+
+#email,
+#github,
+#linkedin,
+#icon {
+    margin-top: .5rem;
+    font-size: 75px;
+    color: var(--black-and-blue);
+}
+
+
+
+/* Responsive Design for Large Screens  */
+@media screen and (min-width: 992px) {
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    header h1{
+        /* background-color: var(--pale-cyan);  */
+        margin-left: 2rem;
+    }
+    /* header h3{
+        background-color: var(--pale-cyan);
+    } */
+    nav {
+        background-color: var(--pale-cyan);
+    }
+    nav {
+        flex-direction: row;
+        justify-content: right;
+        min-width: 450px;
+        padding: 1rem;
+        margin-right: 2rem;
+    }
+    nav a,
+    #high-scores-link {
+        border-radius: 25px;
+        width: 200px;
+        margin-right: 3rem;
+        font-size: 2.25rem;
+
+    }
+    .timer {
+        align-items: flex-end;
+        padding-right: 3.5rem;
+        font-size: 2.25rem;
+    }
+    main {
+        display: flex;
+        margin: 8rem;
+        width: 66%;
+        align-items: center;
+        justify-content: center;
+    }
+    main h2 {
+        font-size: 3rem;
+    }
+    button {
+        font-size: 2.25rem;
+        padding: 2rem;
+    }
+    #icon {
+        margin-top: 1rem;
+        font-size: 100px;
+    }
+    
+  
+}
