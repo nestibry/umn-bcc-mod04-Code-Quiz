@@ -6,8 +6,7 @@
     --black-and-blue: #17252A;
     --dark-cyan: #2B7A78;
     --modr-cyan: #3AAFA9;
-    --lght-cyan: rgb(222, 242, 241);
-    /* --lght-cyan: #b2d8d6; */
+    --lght-cyan: #def2f1;
     --pale-cyan: #FEFFFF;
 }
 
@@ -23,8 +22,6 @@ body {
     /* set body font size to 1.75rem, which is 1.75x more than the font-size of 10px, making it 17.5px  */
     font-size: 1.75rem;
     line-height: 1.5;
-    color: var(--pale-cyan);
-    /* background-color: var(--black-and-blue); */
     
     /* Mobile-first Layout  */
     background-color: var(--pale-cyan);
