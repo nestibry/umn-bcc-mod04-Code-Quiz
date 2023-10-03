@@ -176,6 +176,16 @@ button:hover {
     color: var(--pale-cyan);
 }
 
+#email,
+#github,
+#linkedin,
+#icon {
+    margin-top: .5rem;
+    font-size: 75px;
+    color: var(--black-and-blue);
+}
+
+
 
 /* Responsive Design for Large Screens  */
 @media screen and (min-width: 992px) {
@@ -210,7 +220,7 @@ button:hover {
     main {
         display: flex;
         margin: 8rem;
-        /* width: 66%; */
+        width: 66%;
         align-items: center;
         justify-content: center;
     }
