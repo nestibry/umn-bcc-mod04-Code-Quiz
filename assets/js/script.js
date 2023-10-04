@@ -1,7 +1,21 @@
 var buttonContainer = window.document.querySelector(".buttons");
+var buttonContainer2 = window.document.getElementsByTagName("button");
 
 
-
+var arrQuestions = [
+    {id:0, prompt:"What is a best choice?", choices:[
+        {isAnswer:"no", text:"A"}, 
+        {isAnswer:"no", text:"B"}, 
+        {isAnswer:"yes", text:"C"},
+        {isAnswer:"no", text:"D"}
+    ]},
+    {id:1, prompt:"What is the best color?", choices:[
+        {isAnswer:"yes", text:"blue"}, 
+        {isAnswer:"no", text:"green"}, 
+        {isAnswer:"no", text:"red"},
+        {isAnswer:"no", text:"black"}
+    ]}
+];
 
 
 
@@ -17,13 +31,34 @@ buttonContainer.addEventListener("click", function(event){
 
         console.log("Correct Answer");
 
-        var myTag = document.createElement("button");
+        var newElement= document.createElement("button");
+        newElement.setAttribute("data-answer", "no");
+        newElement.textContent = "This is a Test Button..."
+        buttonContainer.appendChild(newElement);
+
 
     } else {
 
         console.log("Wrong Answer");
 
     }
+
+    // var completedButtons = window.document.querySelector("button");
+    // console.log(completedButtons);
+    console.log("Buttons Container:");
+    console.log(buttonContainer.children.length);
+
+    // console.log(buttonContainer2);
+
+    for(var j = (buttonContainer.children.length - 1); j >= 0; j--) {
+        buttonContainer.children[j].remove();
+    }
+
+    newQuestion = arrQuestions[0].choices[0];
+    var newElement= document.createElement("button");
+    newElement.setAttribute("data-answer", newQuestion.isAnswer);
+    newElement.textContent = newQuestion.text;
+    buttonContainer.appendChild(newElement);
     
 });
 
