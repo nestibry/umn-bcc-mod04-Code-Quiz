@@ -57,11 +57,11 @@ buttonContainer.addEventListener("click", function(event){
         buttonContainer.children[j].remove();
     }
 
-    // Choose a random question from the Array of Questions and add choice buttons to the page
+    // Choose a random question from the Array of Questions and add prompt to the page
     var newQuestion = arrQuestions[ Math.floor( Math.random() * arrQuestions.length ) ];
-
     promptContainer.textContent = newQuestion.prompt;
     console.log(`Prompt: ${newQuestion.prompt}`);
+
 
     // Randomize choices array using the Durstenfeld shuffle algorithm 
     // Source: (Stack Overflow - See post by Laurens Holst and edited by ashleedawg)
@@ -74,7 +74,7 @@ buttonContainer.addEventListener("click", function(event){
         arrChoices[j] = temp;
     }
 
-
+    // Add Choice buttons to the page
     for(var i=0; i < arrChoices.length; i++) {
         var newElement= document.createElement("button");
         newElement.setAttribute("data-answer", arrChoices[i].isAnswer);
