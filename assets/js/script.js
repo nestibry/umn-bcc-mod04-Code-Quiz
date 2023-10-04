@@ -5,7 +5,7 @@ var playerScore = 0;
 
 
 // Look into whether do all strings or just 0/1's for isAnswer
-var arrQuestions = [
+var initQuestions = [
     {
         id:0, 
         points:"500",
@@ -40,6 +40,7 @@ var arrQuestions = [
         ]
     },
 ];
+var arrQuestions = initQuestions.slice(0);
 
 
 
@@ -110,8 +111,9 @@ function initializeStart() {
     console.log(`Prompt: ${promptContainer.textContent}`);
 
     var newElement= document.createElement("button");
-    newElement.setAttribute("data-answer", "1");    // Start button is the correct answer...
+    newElement.setAttribute("data-answer", "1");    // Start button is the correct answer...haha
     newElement.setAttribute("data-points", "0");    // However, no points for starting the quiz...lol
+    // newElement.setAttribute("style", "")
     newElement.textContent = "START";
 
     buttonContainer.appendChild(newElement);
