@@ -5,6 +5,7 @@ var playerScore = 0;
 
 
 // Look into whether do all strings or just 0/1's for isAnswer
+var arrQuestions;
 var initQuestions = [
     {
         id:0, 
@@ -40,7 +41,6 @@ var initQuestions = [
         ]
     },
 ];
-var arrQuestions = initQuestions.slice(0);
 
 
 
@@ -73,9 +73,11 @@ buttonContainer.addEventListener("click", function(event){
         for(var j = (buttonContainer.children.length - 1); j >= 0; j--) {
             buttonContainer.children[j].remove();
         }
+       
+        // Choose last item from shuffled arrQuestions and remove item so it doesn't get repeated
+        var newQuestion = arrQuestions[ arrQuestions.length - 1 ]; // Get the last element in the array
+        arrQuestions.pop(); // Remove the last element in the array
 
-        // Choose a random question from the Array of Questions and add prompt to the page
-        var newQuestion = arrQuestions[ Math.floor( Math.random() * arrQuestions.length ) ];
         promptContainer.textContent = newQuestion.prompt;
         console.log(`Prompt: ${newQuestion.prompt}`);
 
@@ -104,9 +106,10 @@ buttonContainer.addEventListener("click", function(event){
     }
 });
 
-// Initialize Start prompt and button
+
 function initializeStart() {
     
+    // Initialize Start prompt and button
     promptContainer.textContent = "Click Start to begin the Quiz";
     console.log(`Prompt: ${promptContainer.textContent}`);
 
@@ -117,6 +120,15 @@ function initializeStart() {
     newElement.textContent = "START";
 
     buttonContainer.appendChild(newElement);
+
+    // Shuffle the initial Questions array to randomize the Questions order using the Durstenfeld shuffle algorithm --> Source: (Stack Overflow - See post by Laurens Holst and edited by ashleedawg) --> [How To Randomly Shuffle a JavaScript Array - Durstenfeld Shuffle](https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array)
+    arrQuestions = initQuestions.slice(0);
+    for(var i = arrQuestions.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = arrQuestions[i];
+        arrQuestions[i] = arrQuestions[j];
+        arrQuestions[j] = temp;
+    }
 
 }
 initializeStart();
