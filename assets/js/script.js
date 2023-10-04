@@ -1,6 +1,4 @@
 var buttonContainer = window.document.querySelector(".buttons");
-var buttonContainer2 = window.document.getElementsByTagName("button");
-
 
 var arrQuestions = [
     {id:0, prompt:"What is a best choice?", choices:[
@@ -43,22 +41,25 @@ buttonContainer.addEventListener("click", function(event){
 
     }
 
-    // var completedButtons = window.document.querySelector("button");
-    // console.log(completedButtons);
+  
     console.log("Buttons Container:");
     console.log(buttonContainer.children.length);
 
-    // console.log(buttonContainer2);
 
+    // Remove the buttons to get ready for the new question's buttons
     for(var j = (buttonContainer.children.length - 1); j >= 0; j--) {
         buttonContainer.children[j].remove();
     }
 
-    newQuestion = arrQuestions[0].choices[0];
-    var newElement= document.createElement("button");
-    newElement.setAttribute("data-answer", newQuestion.isAnswer);
-    newElement.textContent = newQuestion.text;
-    buttonContainer.appendChild(newElement);
+    // Choose a random question from the Array of Questions and add choice buttons to the page
+    var newQuestion = arrQuestions[ Math.floor( Math.random() * arrQuestions.length ) ];
+
+    for(var i=0; i < newQuestion.choices.length; i++) {
+        var newElement= document.createElement("button");
+        newElement.setAttribute("data-answer", newQuestion.choices[i].isAnswer);
+        newElement.textContent = newQuestion.choices[i].text;
+        buttonContainer.appendChild(newElement);
+    }
     
 });
 
