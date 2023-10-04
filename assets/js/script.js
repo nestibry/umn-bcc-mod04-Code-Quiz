@@ -55,7 +55,7 @@ buttonContainer.addEventListener("click", function(event){
         // Collect data attributes from button
         var isAnswer = element.getAttribute("data-answer");
         var points = element.getAttribute("data-points");
-        console.log(`Points: ${points}`);
+        // console.log(`Points: ${points}`);
 
         // Cases --> If Correct Answer: Add points --> If Wrong Answer: Subtract time
         if(isAnswer.toLowerCase() === "yes" || isAnswer.toLowerCase() === "y" || isAnswer == 1){
@@ -96,15 +96,25 @@ buttonContainer.addEventListener("click", function(event){
             buttonContainer.appendChild(newElement);
             // Console log the correct answer
             if(arrChoices[i].isAnswer.toLowerCase() === "yes" || arrChoices[i].isAnswer.toLowerCase() === "y" || arrChoices[i].isAnswer == 1) {
-                console.log(`Correct Answer: \nPoints: ${newQuestion.points} \nIndex: ${i+1} \n${arrChoices[i].text}`)
+                console.log(`Correct Answer: \nPoints: ${newQuestion.points} \nChoice #: ${i+1} \n${arrChoices[i].text}`)
             }
         }
 
     }
 });
 
-
+// Initialize Start prompt and button
 function initializeStart() {
+    
+    promptContainer.textContent = "Click Start to begin the Quiz";
+    console.log(`Prompt: ${promptContainer.textContent}`);
+
+    var newElement= document.createElement("button");
+    newElement.setAttribute("data-answer", "1");    // Start button is the correct answer...
+    newElement.setAttribute("data-points", "0");    // However, no points for starting the quiz...lol
+    newElement.textContent = "START";
+
+    buttonContainer.appendChild(newElement);
 
 }
 initializeStart();
