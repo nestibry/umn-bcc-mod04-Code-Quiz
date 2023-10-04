@@ -2,6 +2,7 @@
 var promptContainer = window.document.querySelector(".prompt");
 var buttonContainer = window.document.querySelector(".buttons");
 var iconContainer = window.document.querySelector("#icon");
+var headerButton = window.document.querySelector(".header-button");
 var playerScore = 0;
 
 // Array of Questions [ Initial Array is created in data.js and loaded first in index.html ]
@@ -9,6 +10,10 @@ console.log("Initial Array of Questions:");
 console.log(initQuestions);
 var arrQuestions;
 
+
+headerButton.addEventListener("click", function(){
+    alert("You clicked the header button!!");
+});
 
 //
 buttonContainer.addEventListener("click", function(event){
@@ -25,10 +30,12 @@ buttonContainer.addEventListener("click", function(event){
         // console.log(`Points: ${points}`);
 
         // Cases --> If Correct Answer: Add points --> If Wrong Answer: Subtract time
-        if(isAnswer.toLowerCase() === "yes" || isAnswer.toLowerCase() === "y" || isAnswer == 1){
+        if(isAnswer.toLowerCase() === "yes" || isAnswer.toLowerCase() === "y" || isAnswer == 1 || isAnswer.toLowerCase() === "start"){
             playerScore += (points * 1);
             iconContainer.setAttribute("class", "fa fa-check-circle");
             console.log(`Correct! \nPlayer Total Score: ${playerScore}`);
+            // Disable header button when start has been selected
+            if(isAnswer.toLowerCase() === "start"){ headerButton.disabled = true;}
 
         } else {
             iconContainer.setAttribute("class", "fa fa-times-circle");
@@ -95,7 +102,7 @@ function initializeStart(promptText = "Click 'START' to begin the Quiz") {
     console.log(`Prompt: ${promptContainer.textContent}`);
 
     var newElement= document.createElement("button");
-    newElement.setAttribute("data-answer", "1");    // Start button is the correct answer...haha
+    newElement.setAttribute("data-answer", "start");    // Start button ... used to disable header button
     newElement.setAttribute("data-points", "0");    // However, no points for starting the quiz...lol
     newElement.setAttribute("style", "font-size:3rem"); // only updates this singular button element and not future buttons
     newElement.textContent = "START";
@@ -115,7 +122,17 @@ function initializeStart(promptText = "Click 'START' to begin the Quiz") {
 initializeStart();
 
 
+/*
 
+    Items left to complete
+    1. High Scores to a header button
+        a. Disable Header Button during game
+        b. Enable during high scores container (change to back to quiz)
+    2. Log Scores / Input User's Initials / Sort Scores
+    3. Display Scores via button container
+    4. Timer and Subtract Time
+
+*/
 
 
 /*
