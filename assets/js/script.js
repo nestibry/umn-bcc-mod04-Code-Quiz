@@ -104,6 +104,12 @@ buttonContainer.addEventListener("click", function(event){
 });
 
 
+function initializeStart() {
+
+}
+initializeStart();
+
+
 
 
 
