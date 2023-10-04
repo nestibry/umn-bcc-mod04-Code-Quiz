@@ -5,6 +5,10 @@ var iconContainer = window.document.querySelector("#icon");
 var headerButton = window.document.querySelector(".header-button");
 var playerScore = 0;
 
+var highScores = JSON.parse(localStorage.getItem('highScores'));    // Defined in data.js, duplicated here for readability 
+var highScores2;
+
+
 // Array of Questions [ Initial Array is created in data.js and loaded first in index.html ]
 console.log("Initial Array of Questions:");
 console.log(initQuestions);
@@ -93,11 +97,17 @@ function gameEnd() {
     initializeStart(promptText);
 
     // Log scores to highScores local storage
-    var playerEntry = {
-        playerName:"BKN",
-        score:playerScore
-    };
-    localStorage.setItem('playerEntry', JSON.stringify(playerEntry));
+    var playerEntry = {rank:100, name:"BKN29", score:2500};
+
+    highScores = JSON.parse(localStorage.getItem('highScores'));    // Defined in data.js, duplicated here for readability 
+
+    // highScores += playerEntry;
+    highScores.push(playerEntry);
+
+    localStorage.setItem('highScores', JSON.stringify(highScores));
+    highScores2 = JSON.parse(localStorage.getItem('highScores'));    // Defined in data.js, duplicated here for readability 
+
+
     
 }
 
