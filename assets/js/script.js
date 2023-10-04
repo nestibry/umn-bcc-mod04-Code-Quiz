@@ -5,7 +5,10 @@ var iconContainer = window.document.querySelector("#icon");
 
 // Look into whether do all strings or just 0/1's for isAnswer
 var arrQuestions = [
-    {id:0, prompt:`How could you use pseudo-elements to display the message, 'Thanks for checking the box!', after a user clicks on a check box?`, 
+    {
+        id:0, 
+        points:"500",
+        prompt:`How could you use pseudo-elements to display the message, 'Thanks for checking the box!', after a user clicks on a check box?`, 
         choices:[
             {isAnswer:"1", text:`.checkbox:checked + label::after {content: "Thanks for checking the box!";}`}, 
             {isAnswer:"0", text:`.checkbox:checked + label:: after {message:"Thanks for checking the box!";}`}, 
@@ -13,7 +16,10 @@ var arrQuestions = [
             {isAnswer:"0", text:`.checkbox + label {content:"Thanks for checking the box!";}`}
         ]
     },
-    {id:1, prompt:`What is wireframing?`, 
+    {
+        id:1, 
+        points:"100",
+        prompt:`What is wireframing?`, 
         choices:[
             {isAnswer:"1", text:`A blueprint of our website's page layout.`}, 
             {isAnswer:"0", text:`A 3D model of our websites structure made from wires.`}, 
@@ -21,7 +27,10 @@ var arrQuestions = [
             {isAnswer:"0", text:`Wireframing helps us quickly set up our HTML page.`}
         ]
     },
-    {id:2, prompt:`How is Flexbox related to mobile-first design?`, 
+    {
+        id:2, 
+        points:"200",
+        prompt:`How is Flexbox related to mobile-first design?`, 
         choices:[
             {isAnswer:"1", text:`The flex layout allows responsive elements within a container to be automatically arranged depending upon screen size (or device).`}, 
             {isAnswer:"0", text:`The flex layout allows developers to design the mobile user interface first, then other screen resolutions and devices.`}, 
@@ -38,7 +47,9 @@ buttonContainer.addEventListener("click", function(event){
 
     // Get the button pressed AND see if it is the correct answer
     var element = event.target;
-    var isAnswer= element.getAttribute("data-answer");
+    var isAnswer = element.getAttribute("data-answer");
+    var points = element.getAttribute("data-points");
+    console.log(`Points: ${points}`);
 
     // Cases -->
     //      If Correct Answer: Add points
@@ -78,11 +89,12 @@ buttonContainer.addEventListener("click", function(event){
     for(var i=0; i < arrChoices.length; i++) {
         var newElement= document.createElement("button");
         newElement.setAttribute("data-answer", arrChoices[i].isAnswer);
+        newElement.setAttribute("data-points", newQuestion.points);
         newElement.textContent = arrChoices[i].text;
         buttonContainer.appendChild(newElement);
         // Console log the correct answer
         if(arrChoices[i].isAnswer.toLowerCase() === "yes" || arrChoices[i].isAnswer.toLowerCase() === "y" || arrChoices[i].isAnswer == 1) {
-            console.log(`Correct Answer: \nIndex: ${i+1} \n${arrChoices[i].text}`)
+            console.log(`Correct Answer: \nPoints: ${newQuestion.points} \nIndex: ${i+1} \n${arrChoices[i].text}`)
         }
     }
 });
