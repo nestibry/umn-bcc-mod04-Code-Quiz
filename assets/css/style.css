@@ -113,12 +113,11 @@ main h2 {
     flex-direction: column;
     width: 100%;
     color: var(--black-and-blue);
-    text-align: start;
     font-size: 1.75rem;
 }
 
 button {
-    text-align: left;
+    text-align: center;
     padding: 1rem;
     margin: 0.5rem 0;
     color: var(--pale-cyan);
