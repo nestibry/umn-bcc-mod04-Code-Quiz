@@ -91,6 +91,13 @@ function gameEnd() {
     // Initialize Start prompt and button
     var promptText = "Thanks for taking the Quiz! Click 'START' to re-take the Quiz.";
     initializeStart(promptText);
+
+    // Log scores to highScores local storage
+    var playerEntry = {
+        playerName:"BKN",
+        score:playerScore
+    };
+    localStorage.setItem('playerEntry', JSON.stringify(playerEntry));
     
 }
 
