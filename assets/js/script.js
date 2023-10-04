@@ -1,5 +1,6 @@
-var buttonContainer = window.document.querySelector(".buttons");
 var promptContainer = window.document.querySelector(".prompt");
+var buttonContainer = window.document.querySelector(".buttons");
+var iconContainer = window.document.querySelector("#icon");
 
 
 // Look into whether do all strings or just 0/1's for isAnswer
@@ -32,28 +33,26 @@ var arrQuestions = [
 
 
 
-
+//
 buttonContainer.addEventListener("click", function(event){
 
     // Get the button pressed AND see if it is the correct answer
     var element = event.target;
     var isAnswer= element.getAttribute("data-answer");
-    // console.log(`isAnswer: ${isAnswer}  type: ${typeof isAnswer}`);
 
-    // If Correct Answer: Add points
-    // If Wrong Answer: Subtract time
+    // Cases -->
+    //      If Correct Answer: Add points
+    //      If Wrong Answer: Subtract time
     if(isAnswer.toLowerCase() === "yes" || isAnswer.toLowerCase() === "y" || isAnswer == 1){
-
+        iconContainer.setAttribute("class", "fa fa-check-circle");
         console.log("User Selected the Correct Answer");
 
     } else {
-
+        iconContainer.setAttribute("class", "fa fa-times-circle");
         console.log("User Selected the Wrong Answer");
     }
 
     // Remove the buttons to get ready for the new question's buttons
-    // console.log("Buttons Container:");
-    // console.log(buttonContainer.children.length);
     for(var j = (buttonContainer.children.length - 1); j >= 0; j--) {
         buttonContainer.children[j].remove();
     }
@@ -69,7 +68,7 @@ buttonContainer.addEventListener("click", function(event){
         newElement.setAttribute("data-answer", newQuestion.choices[i].isAnswer);
         newElement.textContent = newQuestion.choices[i].text;
         buttonContainer.appendChild(newElement);
-        // Console log the correct answer --> Look into whether do all strings or just 0/1's for isAnswer
+        // Console log the correct answer
         if(newQuestion.choices[i].isAnswer.toLowerCase() === "yes" || newQuestion.choices[i].isAnswer.toLowerCase() === "y" || newQuestion.choices[i].isAnswer == 1) {
             console.log(`Correct Answer: \nIndex: ${i} \n${newQuestion.choices[i].text}`)
         }
