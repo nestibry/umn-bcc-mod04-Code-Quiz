@@ -113,7 +113,7 @@ function initializeStart() {
     var newElement= document.createElement("button");
     newElement.setAttribute("data-answer", "1");    // Start button is the correct answer...haha
     newElement.setAttribute("data-points", "0");    // However, no points for starting the quiz...lol
-    // newElement.setAttribute("style", "")
+    newElement.setAttribute("style", "font-size:3rem"); // only updates this singular button element and not future buttons
     newElement.textContent = "START";
 
     buttonContainer.appendChild(newElement);
