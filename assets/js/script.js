@@ -115,7 +115,17 @@ function initializeStart(promptText = "Click 'START' to begin the Quiz") {
 initializeStart();
 
 
+/*
 
+    Items left to complete
+    1. High Scores to a header button
+        a. Disable Header Button during game
+        b. Enable during high scores container (change to back to quiz)
+    2. Log Scores / Input User's Initials / Sort Scores
+    3. Display Scores via button container
+    4. Timer and Subtract Time
+    
+*/
 
 
 /*
