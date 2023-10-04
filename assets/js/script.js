@@ -1,47 +1,13 @@
+// Global Variables
 var promptContainer = window.document.querySelector(".prompt");
 var buttonContainer = window.document.querySelector(".buttons");
 var iconContainer = window.document.querySelector("#icon");
 var playerScore = 0;
 
-
-// Look into whether do all strings or just 0/1's for isAnswer
+// Array of Questions [ Initial Array is created in data.js and loaded first in index.html ]
+console.log("Initial Array of Questions:");
+console.log(initQuestions);
 var arrQuestions;
-var initQuestions = [
-    {
-        id:0, 
-        points:"500",
-        prompt:`How could you use pseudo-elements to display the message, 'Thanks for checking the box!', after a user clicks on a check box?`, 
-        choices:[
-            {isAnswer:"1", text:`.checkbox:checked + label::after {content: "Thanks for checking the box!";}`}, 
-            {isAnswer:"0", text:`.checkbox:checked + label:: after {message:"Thanks for checking the box!";}`}, 
-            {isAnswer:"0", text:`.checkbox + label {message:"Thanks for checking the box!";}`},
-            {isAnswer:"0", text:`.checkbox + label {content:"Thanks for checking the box!";}`}
-        ]
-    },
-    {
-        id:1, 
-        points:"100",
-        prompt:`What is wireframing?`, 
-        choices:[
-            {isAnswer:"1", text:`A blueprint of our website's page layout.`}, 
-            {isAnswer:"0", text:`A 3D model of our websites structure made from wires.`}, 
-            {isAnswer:"0", text:`A CSS library that helps in the creation of borders around our boxed elements.`},
-            {isAnswer:"0", text:`Wireframing helps us quickly set up our HTML page.`}
-        ]
-    },
-    {
-        id:2, 
-        points:"200",
-        prompt:`How is Flexbox related to mobile-first design?`, 
-        choices:[
-            {isAnswer:"1", text:`The flex layout allows responsive elements within a container to be automatically arranged depending upon screen size (or device).`}, 
-            {isAnswer:"0", text:`The flex layout allows developers to design the mobile user interface first, then other screen resolutions and devices.`}, 
-            {isAnswer:"0", text:`The flex layout allows non-responsive elements within a container to behave as responsive elements depending upon screen size (or device).`},
-            {isAnswer:"0", text:`The flex layout allows for the user to select an interface based on the screen size (or device).`}
-        ]
-    },
-];
-
 
 
 //
@@ -73,44 +39,59 @@ buttonContainer.addEventListener("click", function(event){
         for(var j = (buttonContainer.children.length - 1); j >= 0; j--) {
             buttonContainer.children[j].remove();
         }
-       
-        // Choose last item from shuffled arrQuestions and remove item so it doesn't get repeated
-        var newQuestion = arrQuestions[ arrQuestions.length - 1 ]; // Get the last element in the array
-        arrQuestions.pop(); // Remove the last element in the array
-
-        promptContainer.textContent = newQuestion.prompt;
-        console.log(`Prompt: ${newQuestion.prompt}`);
-
-        // Randomize choices array using the Durstenfeld shuffle algorithm --> Source: (Stack Overflow - See post by Laurens Holst and edited by ashleedawg) --> [How To Randomly Shuffle a JavaScript Array - Durstenfeld Shuffle](https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array)
-        var arrChoices = newQuestion.choices.slice(0);
-        for(var i = arrChoices.length - 1; i > 0; i--) {
-            var j = Math.floor(Math.random() * (i + 1));
-            var temp = arrChoices[i];
-            arrChoices[i] = arrChoices[j];
-            arrChoices[j] = temp;
-        }
         
-        // Add Choice buttons to the page
-        for(var i=0; i < arrChoices.length; i++) {
-            var newElement= document.createElement("button");
-            newElement.setAttribute("data-answer", arrChoices[i].isAnswer);
-            newElement.setAttribute("data-points", newQuestion.points);
-            newElement.textContent = arrChoices[i].text;
-            buttonContainer.appendChild(newElement);
-            // Console log the correct answer
-            if(arrChoices[i].isAnswer.toLowerCase() === "yes" || arrChoices[i].isAnswer.toLowerCase() === "y" || arrChoices[i].isAnswer == 1) {
-                console.log(`Correct Answer: \nPoints: ${newQuestion.points} \nChoice #: ${i+1} \n${arrChoices[i].text}`)
+        // Check that there are questions remaining, if none remaining go to gameEnd()
+        if (arrQuestions.length > 0) {
+
+            // Choose last item from shuffled arrQuestions and remove item so it doesn't get repeated
+            var newQuestion = arrQuestions[ arrQuestions.length - 1 ]; // Get the last element in the array
+            arrQuestions.pop(); // Remove the last element in the array
+
+            promptContainer.textContent = newQuestion.prompt;
+            console.log(`Prompt: ${newQuestion.prompt}`);
+
+            // Randomize choices array using the Durstenfeld shuffle algorithm --> Source: (Stack Overflow - See post by Laurens Holst and edited by ashleedawg) --> [How To Randomly Shuffle a JavaScript Array - Durstenfeld Shuffle](https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array)
+            var arrChoices = newQuestion.choices.slice(0);
+            for(var i = arrChoices.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = arrChoices[i];
+                arrChoices[i] = arrChoices[j];
+                arrChoices[j] = temp;
             }
+            
+            // Add Choice buttons to the page
+            for(var i=0; i < arrChoices.length; i++) {
+                var newElement= document.createElement("button");
+                newElement.setAttribute("data-answer", arrChoices[i].isAnswer);
+                newElement.setAttribute("data-points", newQuestion.points);
+                newElement.textContent = arrChoices[i].text;
+                buttonContainer.appendChild(newElement);
+                // Console log the correct answer
+                if(arrChoices[i].isAnswer.toLowerCase() === "yes" || arrChoices[i].isAnswer.toLowerCase() === "y" || arrChoices[i].isAnswer == 1) {
+                    console.log(`Correct Answer: \nPoints: ${newQuestion.points} \nChoice #: ${i+1} \n${arrChoices[i].text}`)
+                }
+            }
+        } else {
+            gameEnd();
         }
 
     }
 });
 
 
-function initializeStart() {
+function gameEnd() {
     
     // Initialize Start prompt and button
-    promptContainer.textContent = "Click Start to begin the Quiz";
+    var promptText = "Thanks for taking the Quiz! Click 'START' to re-take the Quiz.";
+    initializeStart(promptText);
+    
+}
+
+
+function initializeStart(promptText = "Click 'START' to begin the Quiz") {
+    
+    // Initialize Start prompt and button
+    promptContainer.textContent = promptText;
     console.log(`Prompt: ${promptContainer.textContent}`);
 
     var newElement= document.createElement("button");
