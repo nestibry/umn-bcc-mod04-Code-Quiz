@@ -5,6 +5,7 @@ var playerScore = 0;
 
 
 // Look into whether do all strings or just 0/1's for isAnswer
+var arrQuestions;
 var initQuestions = [
     {
         id:0, 
@@ -40,7 +41,6 @@ var initQuestions = [
         ]
     },
 ];
-var arrQuestions = initQuestions.slice(0);
 
 
 
@@ -104,9 +104,10 @@ buttonContainer.addEventListener("click", function(event){
     }
 });
 
-// Initialize Start prompt and button
+
 function initializeStart() {
     
+    // Initialize Start prompt and button
     promptContainer.textContent = "Click Start to begin the Quiz";
     console.log(`Prompt: ${promptContainer.textContent}`);
 
@@ -117,6 +118,15 @@ function initializeStart() {
     newElement.textContent = "START";
 
     buttonContainer.appendChild(newElement);
+
+    // Shuffle the initial Questions array to randomize the order using the Durstenfeld shuffle algorithm --> Source: (Stack Overflow - See post by Laurens Holst and edited by ashleedawg) --> [How To Randomly Shuffle a JavaScript Array - Durstenfeld Shuffle](https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array)
+    arrQuestions = initQuestions.slice(0);
+    for(var i = arrQuestions.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = arrQuestions[i];
+        arrQuestions[i] = arrQuestions[j];
+        arrQuestions[j] = temp;
+    }
 
 }
 initializeStart();
