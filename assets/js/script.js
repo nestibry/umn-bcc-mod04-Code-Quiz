@@ -63,14 +63,26 @@ buttonContainer.addEventListener("click", function(event){
     promptContainer.textContent = newQuestion.prompt;
     console.log(`Prompt: ${newQuestion.prompt}`);
 
-    for(var i=0; i < newQuestion.choices.length; i++) {
+    // Randomize choices array using the Durstenfeld shuffle algorithm 
+    // Source: (Stack Overflow - See post by Laurens Holst and edited by ashleedawg)
+    // [How To Randomly Shuffle a JavaScript Array - Durstenfeld Shuffle](https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array)
+    var arrChoices = newQuestion.choices.slice(0);
+    for(var i = arrChoices.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = arrChoices[i];
+        arrChoices[i] = arrChoices[j];
+        arrChoices[j] = temp;
+    }
+
+
+    for(var i=0; i < arrChoices.length; i++) {
         var newElement= document.createElement("button");
-        newElement.setAttribute("data-answer", newQuestion.choices[i].isAnswer);
-        newElement.textContent = newQuestion.choices[i].text;
+        newElement.setAttribute("data-answer", arrChoices[i].isAnswer);
+        newElement.textContent = arrChoices[i].text;
         buttonContainer.appendChild(newElement);
         // Console log the correct answer
-        if(newQuestion.choices[i].isAnswer.toLowerCase() === "yes" || newQuestion.choices[i].isAnswer.toLowerCase() === "y" || newQuestion.choices[i].isAnswer == 1) {
-            console.log(`Correct Answer: \nIndex: ${i} \n${newQuestion.choices[i].text}`)
+        if(arrChoices[i].isAnswer.toLowerCase() === "yes" || arrChoices[i].isAnswer.toLowerCase() === "y" || arrChoices[i].isAnswer == 1) {
+            console.log(`Correct Answer: \nIndex: ${i+1} \n${arrChoices[i].text}`)
         }
     }
 });
