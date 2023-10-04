@@ -1,9 +1,31 @@
+var buttonContainer = window.document.querySelector(".buttons");
 
 
 
 
 
 
+
+buttonContainer.addEventListener("click", function(event){
+
+    var element = event.target;
+    console.log(element);
+
+    var isAnswer= element.getAttribute("data-answer");
+
+    if(isAnswer.toLowerCase() === "yes" || isAnswer.toLowerCase() === "y"){
+
+        console.log("Correct Answer");
+
+        var myTag = document.createElement("button");
+
+    } else {
+
+        console.log("Wrong Answer");
+
+    }
+    
+});
 
 
 
