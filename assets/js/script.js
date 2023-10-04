@@ -1,6 +1,7 @@
 var promptContainer = window.document.querySelector(".prompt");
 var buttonContainer = window.document.querySelector(".buttons");
 var iconContainer = window.document.querySelector("#icon");
+var playerScore = 0;
 
 
 // Look into whether do all strings or just 0/1's for isAnswer
@@ -51,16 +52,15 @@ buttonContainer.addEventListener("click", function(event){
     var points = element.getAttribute("data-points");
     console.log(`Points: ${points}`);
 
-    // Cases -->
-    //      If Correct Answer: Add points
-    //      If Wrong Answer: Subtract time
+    // Cases --> If Correct Answer: Add points --> If Wrong Answer: Subtract time
     if(isAnswer.toLowerCase() === "yes" || isAnswer.toLowerCase() === "y" || isAnswer == 1){
+        playerScore += (points * 1);
         iconContainer.setAttribute("class", "fa fa-check-circle");
-        console.log("User Selected the Correct Answer");
+        console.log(`Correct! \nPlayer Total Score: ${playerScore}`);
 
     } else {
         iconContainer.setAttribute("class", "fa fa-times-circle");
-        console.log("User Selected the Wrong Answer");
+        console.log(`Wrong Answer \nPlayer Total Score: ${playerScore}`);
     }
 
     // Remove the buttons to get ready for the new question's buttons
@@ -74,9 +74,7 @@ buttonContainer.addEventListener("click", function(event){
     console.log(`Prompt: ${newQuestion.prompt}`);
 
 
-    // Randomize choices array using the Durstenfeld shuffle algorithm 
-    // Source: (Stack Overflow - See post by Laurens Holst and edited by ashleedawg)
-    // [How To Randomly Shuffle a JavaScript Array - Durstenfeld Shuffle](https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array)
+    // Randomize choices array using the Durstenfeld shuffle algorithm --> Source: (Stack Overflow - See post by Laurens Holst and edited by ashleedawg) --> [How To Randomly Shuffle a JavaScript Array - Durstenfeld Shuffle](https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array)
     var arrChoices = newQuestion.choices.slice(0);
     for(var i = arrChoices.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
