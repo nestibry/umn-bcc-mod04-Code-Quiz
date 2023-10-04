@@ -48,52 +48,58 @@ buttonContainer.addEventListener("click", function(event){
 
     // Get the button pressed AND see if it is the correct answer
     var element = event.target;
-    var isAnswer = element.getAttribute("data-answer");
-    var points = element.getAttribute("data-points");
-    console.log(`Points: ${points}`);
 
-    // Cases --> If Correct Answer: Add points --> If Wrong Answer: Subtract time
-    if(isAnswer.toLowerCase() === "yes" || isAnswer.toLowerCase() === "y" || isAnswer == 1){
-        playerScore += (points * 1);
-        iconContainer.setAttribute("class", "fa fa-check-circle");
-        console.log(`Correct! \nPlayer Total Score: ${playerScore}`);
+    // Check if the clicked element was a button...if a button, then do the following:
+    if (element.matches("button")) {
+        
+        // Collect data attributes from button
+        var isAnswer = element.getAttribute("data-answer");
+        var points = element.getAttribute("data-points");
+        console.log(`Points: ${points}`);
 
-    } else {
-        iconContainer.setAttribute("class", "fa fa-times-circle");
-        console.log(`Wrong Answer \nPlayer Total Score: ${playerScore}`);
-    }
+        // Cases --> If Correct Answer: Add points --> If Wrong Answer: Subtract time
+        if(isAnswer.toLowerCase() === "yes" || isAnswer.toLowerCase() === "y" || isAnswer == 1){
+            playerScore += (points * 1);
+            iconContainer.setAttribute("class", "fa fa-check-circle");
+            console.log(`Correct! \nPlayer Total Score: ${playerScore}`);
 
-    // Remove the buttons to get ready for the new question's buttons
-    for(var j = (buttonContainer.children.length - 1); j >= 0; j--) {
-        buttonContainer.children[j].remove();
-    }
-
-    // Choose a random question from the Array of Questions and add prompt to the page
-    var newQuestion = arrQuestions[ Math.floor( Math.random() * arrQuestions.length ) ];
-    promptContainer.textContent = newQuestion.prompt;
-    console.log(`Prompt: ${newQuestion.prompt}`);
-
-
-    // Randomize choices array using the Durstenfeld shuffle algorithm --> Source: (Stack Overflow - See post by Laurens Holst and edited by ashleedawg) --> [How To Randomly Shuffle a JavaScript Array - Durstenfeld Shuffle](https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array)
-    var arrChoices = newQuestion.choices.slice(0);
-    for(var i = arrChoices.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = arrChoices[i];
-        arrChoices[i] = arrChoices[j];
-        arrChoices[j] = temp;
-    }
-
-    // Add Choice buttons to the page
-    for(var i=0; i < arrChoices.length; i++) {
-        var newElement= document.createElement("button");
-        newElement.setAttribute("data-answer", arrChoices[i].isAnswer);
-        newElement.setAttribute("data-points", newQuestion.points);
-        newElement.textContent = arrChoices[i].text;
-        buttonContainer.appendChild(newElement);
-        // Console log the correct answer
-        if(arrChoices[i].isAnswer.toLowerCase() === "yes" || arrChoices[i].isAnswer.toLowerCase() === "y" || arrChoices[i].isAnswer == 1) {
-            console.log(`Correct Answer: \nPoints: ${newQuestion.points} \nIndex: ${i+1} \n${arrChoices[i].text}`)
+        } else {
+            iconContainer.setAttribute("class", "fa fa-times-circle");
+            console.log(`Wrong Answer \nPlayer Total Score: ${playerScore}`);
         }
+
+        // Clear the button container to get ready for the new question's buttons
+        for(var j = (buttonContainer.children.length - 1); j >= 0; j--) {
+            buttonContainer.children[j].remove();
+        }
+
+        // Choose a random question from the Array of Questions and add prompt to the page
+        var newQuestion = arrQuestions[ Math.floor( Math.random() * arrQuestions.length ) ];
+        promptContainer.textContent = newQuestion.prompt;
+        console.log(`Prompt: ${newQuestion.prompt}`);
+
+        // Randomize choices array using the Durstenfeld shuffle algorithm --> Source: (Stack Overflow - See post by Laurens Holst and edited by ashleedawg) --> [How To Randomly Shuffle a JavaScript Array - Durstenfeld Shuffle](https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array)
+        var arrChoices = newQuestion.choices.slice(0);
+        for(var i = arrChoices.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = arrChoices[i];
+            arrChoices[i] = arrChoices[j];
+            arrChoices[j] = temp;
+        }
+        
+        // Add Choice buttons to the page
+        for(var i=0; i < arrChoices.length; i++) {
+            var newElement= document.createElement("button");
+            newElement.setAttribute("data-answer", arrChoices[i].isAnswer);
+            newElement.setAttribute("data-points", newQuestion.points);
+            newElement.textContent = arrChoices[i].text;
+            buttonContainer.appendChild(newElement);
+            // Console log the correct answer
+            if(arrChoices[i].isAnswer.toLowerCase() === "yes" || arrChoices[i].isAnswer.toLowerCase() === "y" || arrChoices[i].isAnswer == 1) {
+                console.log(`Correct Answer: \nPoints: ${newQuestion.points} \nIndex: ${i+1} \n${arrChoices[i].text}`)
+            }
+        }
+
     }
 });
 
