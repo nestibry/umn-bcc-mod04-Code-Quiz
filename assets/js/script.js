@@ -164,7 +164,12 @@ buttonContainer.addEventListener("click", function(event){
                 console.log(`Loading More Questions... gameState: ${gameState}`);
                 renderMainContainer();
                 break;
+            case "submit":
+                break;
             case "end":
+                gameState = "start";
+                console.log(`Game Over. Going to Submit Screen... gameState: ${gameState}`);
+                renderMainContainer();
                 break;
 
         }
