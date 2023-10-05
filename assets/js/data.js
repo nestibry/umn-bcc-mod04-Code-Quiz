@@ -1,13 +1,13 @@
 // Look into whether do all strings or just 0/1's for isAnswer
 
 // Creating an array of High Scores for demoing/debugging purposes only
-var highScores = [
-    {rank:0,  name:"BKN",    score:500},
-    {rank:1,  name:"BryGuy", score:1500},
-    {rank:2,  name:"MLH",    score:100},
-    {rank:3,  name:"WHN",    score:600},
-];
-localStorage.setItem('highScores', JSON.stringify(highScores));
+// var highScores = [
+//     {rank:0,  name:"BKN",    score:500},
+//     {rank:1,  name:"BryGuy", score:1500},
+//     {rank:2,  name:"MLH",    score:100},
+//     {rank:3,  name:"WHN",    score:600},
+// ];
+// localStorage.setItem('highScores', JSON.stringify(highScores));
 
 // 
 var initQuestions = [
