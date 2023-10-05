@@ -5,6 +5,10 @@ var iconContainer = window.document.querySelector("#icon");
 var headerButton = window.document.querySelector(".header-button");
 var playerScore = 0;
 
+
+var highScores = JSON.parse(localStorage.getItem('highScores')) || [];    // Null || empty array []
+
+
 // Array of Questions [ Initial Array is created in data.js and loaded first in index.html ]
 console.log("Initial Array of Questions:");
 console.log(initQuestions);
@@ -12,7 +16,7 @@ var arrQuestions;
 
 
 headerButton.addEventListener("click", function(){
-    alert("You clicked the header button!!");
+    // alert("You clicked the header button!!");
 });
 
 //
@@ -88,9 +92,45 @@ buttonContainer.addEventListener("click", function(event){
 
 function gameEnd() {
     
+    // Input and button to trigger capture
+
+
+
+    // Record score
+    var playerEntry = {name:"BKN29", score:playerScore};
+    
+    
+    
+    highScores.push(playerEntry);  // local array
+
+
+
+    localStorage.setItem('highScores', JSON.stringify(highScores));
+
+
+
+
     // Initialize Start prompt and button
     var promptText = "Thanks for taking the Quiz! Click 'START' to re-take the Quiz.";
     initializeStart(promptText);
+
+
+
+
+
+    // // Log scores to highScores local storage
+    // var playerEntry = {name:"BKN29", score:2500};
+
+    // highScores = JSON.parse(localStorage.getItem('highScores'));    // Defined in data.js, duplicated here for readability 
+
+    // // highScores += playerEntry;
+    // highScores.push(playerEntry);
+
+    // localStorage.setItem('highScores', JSON.stringify(highScores));
+    // highScores2 = JSON.parse(localStorage.getItem('highScores'));    // Defined in data.js, duplicated here for readability 
+
+
+
     
 }
 
