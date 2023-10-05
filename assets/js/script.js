@@ -74,8 +74,9 @@ function renderMainContainer() {
             newElement.textContent = "START";
             buttonContainer.appendChild(newElement);
             
-            // Seed arrQuestions and shuffle question order (and their choices)
+            // Seed arrQuestions and shuffle question order (and their choices) & reload highScores
             shuffleQuestions();
+            highScores = JSON.parse(localStorage.getItem('highScores')) || [];    // Null || empty array []
 
             // Reset player variables
             playerScore = 0;
