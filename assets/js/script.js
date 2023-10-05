@@ -92,7 +92,7 @@ function renderMainContainer() {
         
         case "active":
             // render question prompt and buttons
-            // Check that there are questions remaining, if none remaining go to gameEnd()
+            // Check that there are questions remaining, if none remaining go then its game end
             console.log(`arrQuestions.length: ${arrQuestions.length}`)
             if(arrQuestions.length > 0){
 
@@ -110,15 +110,10 @@ function renderMainContainer() {
                     newElement.textContent = arrChoices[i].text;
                     buttonContainer.appendChild(newElement);
                     // Console log the correct answer
-                    // if(arrChoices[i].isAnswer.toLowerCase() === "yes" || arrChoices[i].isAnswer.toLowerCase() === "y" || arrChoices[i].isAnswer == 1) {
                     if(arrChoices[i].isAnswer === true || arrChoices[i].isAnswer == "true") {
                         console.log(`Prompt: ${newQuestion.prompt} \nCorrect Choice #: ${i+1} \n${arrChoices[i].text} \nPoints: ${newQuestion.points}`)
                     }
                 }
-                // if (arrQuestions.length === 0) {
-                //     gameState = "end";
-                //     console.log(`Game Over. gameState: ${gameState}`);
-                // }
             } 
             break;
         
@@ -144,19 +139,12 @@ function renderMainContainer() {
             
             // Render SUBMIT button
             var newElement = document.createElement("button");
-            newElement.setAttribute("data-answer", true);    // Submit button
-            newElement.setAttribute("data-points", "0");    // However, no points for starting the quiz...lol
-            newElement.setAttribute("style", "font-size:3rem"); // only updates this singular button element and not future buttons
-            // newElement.addEventListener("click", function(){
-            //     var inputField = document.querySelector("#player-name");
-            //     console.log(inputField.value);
-            //     playerName = inputField.value;
-            // })
+            newElement.setAttribute("data-answer", true);    
+            newElement.setAttribute("data-points", "0");    
+            newElement.setAttribute("style", "font-size:3rem"); 
             newElement.textContent = "SUBMIT";
             buttonContainer.appendChild(newElement);
 
-            // gameState = "start";
-            // console.log(`Re-starting game... gameState: ${gameState}`);
             break;
     }
 }
@@ -180,7 +168,6 @@ buttonContainer.addEventListener("click", function(event){
         console.log(`isAnswer: ${isAnswer} \npoints: ${points} \ngameState: ${gameState}`);
 
         // Cases --> If Correct Answer: Add points --> If Wrong Answer: Subtract time
-        // if(isAnswer.toLowerCase() === "yes" || isAnswer.toLowerCase() === "y" || isAnswer == 1 || isAnswer.toLowerCase() === "start" || isAnswer.toLowerCase() === "end"){
         if(isAnswer == 1 || isAnswer === true || isAnswer == "true"){
             playerScore += (points * 1);
             iconContainer.setAttribute("class", "fa fa-check-circle");
@@ -192,12 +179,6 @@ buttonContainer.addEventListener("click", function(event){
         }
 
         // Change the gameState
-        // // Disable header button when start has been selected
-            // if(isAnswer.toLowerCase() === "start"){ 
-            //     headerButton.disabled = true;
-            // } else if (isAnswer.toLowerCase() === "end"){
-            //     headerButton.disabled = false;
-            // }
         switch(gameState){
 
             case "start":
@@ -223,14 +204,21 @@ buttonContainer.addEventListener("click", function(event){
                 break;
             
             case "end":
+                
+                // Collect Player Name
                 var inputField = document.querySelector("#player-name");
                 console.log(inputField.value);
                 playerName = inputField.value;
                 gameState = "start";
 
-                // Enable High Scores Link
-                headerButton.setAttribute("href", highScoresLink);
+                // Record score -- this will store the scores in order of which they were recieved
+                var playerEntry = {name:playerName, score:playerScore};
+                highScores.push(playerEntry);  // local array
+                localStorage.setItem('highScores', JSON.stringify(highScores));
+
                 console.log(`Submitted ${playerName}'s score of ${playerScore}. Going back to Start... gameState: ${gameState}`);
+
+                headerButton.setAttribute("href", highScoresLink);  // Enable High Scores Link
                 renderMainContainer();
                 break;
 
