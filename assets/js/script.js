@@ -3,23 +3,42 @@ var promptContainer = window.document.querySelector(".prompt");  // child of mai
 var buttonContainer = window.document.querySelector(".buttons"); // child of mainContainer
 var iconContainer = window.document.querySelector("#icon");
 var headerButton = window.document.querySelector(".header-button");
+var subHeaderEl = window.document.querySelector(".sub-header");
 var highScoresLink = headerButton.getAttribute("href");
-var playerScore = 0;
-var playerName = "";
-var iconState = true;  // correct := true, wrong := false
-
 
 var highScores = JSON.parse(localStorage.getItem('highScores')) || [];    // Null || empty array []
-
-
-// Array of Questions [ Initial Array is created in data.js and loaded first in index.html ]
-console.log("Initial Array of Questions:");
-console.log(initQuestions);
-var arrQuestions = []; // seed the arrQuestions to be manipulate, maintain a single source of truht with initQuestions
-
+var playerScore = 0;
+var playerName = "";
 
 let gameState = "start";  // start || active || end
-console.log(`Starting Game. gameState: ${gameState}`);
+var iconState = true;  // correct := true, wrong := false
+var arrQuestions = []; // seed the arrQuestions to be manipulate, maintain a single source of truht with initQuestions
+var secondsLeft = 20;
+subHeaderEl.textContent = secondsLeft + "  Seconds Remaining";
+
+console.log(`Loading Coding Quiz Script....`);
+console.log("Initial Array of Questions:");  // Array of Questions [ Initial Array is created in data.js and loaded first in index.html ]
+console.log(initQuestions);
+
+
+
+function setTime() {
+    // Sets interval in variable
+    var timerInterval = setInterval(function(){
+
+        secondsLeft--;
+        subHeaderEl.textContent = secondsLeft + "  Seconds Remaining";
+
+        if(secondsLeft === 0) {
+            // Stops execution of action at set interval
+            clearInterval(timerInterval);
+            subHeaderEl.textContent = "Times Up!";
+        }
+
+    }, 1000);
+}
+
+
 
 
 function shuffleQuestions() {
@@ -63,6 +82,11 @@ function renderMainContainer() {
 
     switch(gameState){
         case "start":
+            
+            // Seed arrQuestions and shuffle question order (and their choices) & reload highScores
+            shuffleQuestions();
+            highScores = JSON.parse(localStorage.getItem('highScores')) || [];    // Null || empty array []
+
             // render start prompt and button
             promptContainer.textContent = "Click 'START' to begin the Quiz";
             console.log(`Prompt: ${promptContainer.textContent}`);
@@ -74,18 +98,9 @@ function renderMainContainer() {
             newElement.textContent = "START";
             buttonContainer.appendChild(newElement);
             
-            // Seed arrQuestions and shuffle question order (and their choices) & reload highScores
-            shuffleQuestions();
-            highScores = JSON.parse(localStorage.getItem('highScores')) || [];    // Null || empty array []
-
             // Reset player variables
             playerScore = 0;
             playerName = "";
-            // headerButton.disabled = true;
-            // headerButton.setAttribute("href", "javascript:void(0)");
-
-            // gameState = "active";
-            console.log(`At the Start... gameState: ${gameState}`);
             break;
         
         case "active":
@@ -186,7 +201,9 @@ buttonContainer.addEventListener("click", function(event){
                 // Disable High Scores Link during the Quiz
                 headerButton.setAttribute("href", "javascript:void(0)");
                 console.log(`Loading Questions... gameState: ${gameState}`);
+                
                 renderMainContainer();
+                setTime(); //Game Begins
                 break;
             
             case "active":
