@@ -21,8 +21,12 @@ for(var i=0; i < highScores.length; i++){
     
     var li = document.createElement("li");
     li.textContent = entryStr;
-
-    li.setAttribute("style", "background-color:#2B7A78")
+    //alternate background color
+    if(i%2===0){
+        li.setAttribute("style", "font-weight:500; color:#17252A; background-color:#3AAFA9");
+    } else {
+        li.setAttribute("style", "font-weight:500; color:#17252A; background-color:#def2f1")
+    }
 
     highScoresEl.appendChild(li); 
 }

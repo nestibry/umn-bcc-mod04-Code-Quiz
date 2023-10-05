@@ -100,6 +100,7 @@ main {
 
     /* Mobile-first layout  */
     margin: 3rem;
+    width: 90%;
 }
 
 main h2 {
@@ -110,8 +111,7 @@ main h2 {
     margin-bottom: 2rem;    
 }
 
-.buttons,
-ol {
+.buttons, ol {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -120,7 +120,7 @@ ol {
 }
 
 button,
-li {
+.high-scores-list li {
     text-align: center;
     padding: 1rem;
     margin: 0.5rem 0;
@@ -174,8 +174,7 @@ button:hover {
     main h2 {
         font-size: 3rem;
     }
-    button,
-    li {
+    button {
         font-size: 2.25rem;
         padding: 2rem;
     }
