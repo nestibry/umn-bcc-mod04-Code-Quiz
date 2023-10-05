@@ -30,7 +30,8 @@ body {
 }
 
 h1,
-h2 {
+h2,
+input {
     margin-bottom: 0.625rem;
     font-weight: 700;
     line-height: 1.1;
@@ -41,7 +42,8 @@ h1 {
     font-size: 4rem;
 }
   
-h2 {
+h2,
+input {
     font-size: 3.5rem;
 }
 
