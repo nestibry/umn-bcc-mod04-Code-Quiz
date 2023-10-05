@@ -12,16 +12,16 @@ var highScores = JSON.parse(localStorage.getItem('highScores')) || [];    // Nul
 // Array of Questions [ Initial Array is created in data.js and loaded first in index.html ]
 console.log("Initial Array of Questions:");
 console.log(initQuestions);
-var arrQuestions;
+var arrQuestions = initQuestions.slice(0); // seed the arrQuestions to be manipulate, maintain a single source of truht with initQuestions
 
 
-var gameState = "start";  // start || active || end
+var gameState = "active";  // start || active || end
 
 function renderMainContainer() {
 
     switch(gameState){
         case "start":
-            // Initialize Start prompt and button
+            // render start prompt and button
             promptContainer.textContent = "Click 'START' to begin the Quiz";
             console.log(`Prompt: ${promptContainer.textContent}`);
             var newElement= document.createElement("button");
@@ -33,8 +33,40 @@ function renderMainContainer() {
             break;
         
         case "active":
+            // Clear the button container to get ready for the new question's buttons
+            for(var j = (buttonContainer.children.length - 1); j >= 0; j--) {
+                buttonContainer.children[j].remove();
+            }
+        
+            // render question prompt and buttons
+            // Check that there are questions remaining, if none remaining go to gameEnd()
+            if(arrQuestions.length > 0){
+
+                // Choose last item from shuffled arrQuestions and remove item so it doesn't get repeated
+                var newQuestion = arrQuestions[ arrQuestions.length - 1 ]; // Get the last element in the array
+                var arrChoices = newQuestion.choices.slice(0);
+                arrQuestions.pop(); // Remove the last element in the array
+                promptContainer.textContent = newQuestion.prompt;
+
+                // Add Choice buttons to the page
+                for(var i=0; i < arrChoices.length; i++) {
+                    var newElement= document.createElement("button");
+                    newElement.setAttribute("data-answer", arrChoices[i].isAnswer);
+                    newElement.setAttribute("data-points", newQuestion.points);
+                    newElement.textContent = arrChoices[i].text;
+                    buttonContainer.appendChild(newElement);
+                    // Console log the correct answer
+                    if(arrChoices[i].isAnswer.toLowerCase() === "yes" || arrChoices[i].isAnswer.toLowerCase() === "y" || arrChoices[i].isAnswer == 1) {
+                        console.log(`Prompt: ${newQuestion.prompt} \nCorrect Choice #: ${i+1} \n${arrChoices[i].text} \nPoints: ${newQuestion.points}`)
+                    }
+                }
+            } else {
+                console.log("Game Over");
+            }
+
             break;
         
+
         case "end":
             break;
     }
