@@ -41,7 +41,9 @@ function renderMainContainer() {
             newElement.textContent = "START";
             buttonContainer.appendChild(newElement);
             
-            gameState = "active";
+            // Add in Shuffle Questions (and their choices) function call
+
+            // gameState = "active";
             console.log(`Loading Questions... gameState: ${gameState}`);
             break;
         
@@ -136,17 +138,29 @@ buttonContainer.addEventListener("click", function(event){
             playerScore += (points * 1);
             iconContainer.setAttribute("class", "fa fa-check-circle");
             console.log(`Correct! \nPlayer Total Score: ${playerScore}`);
-            
-            // Disable header button when start has been selected
-            if(isAnswer.toLowerCase() === "start"){ 
-                headerButton.disabled = true;
-            } else if (isAnswer.toLowerCase() === "end"){
-                headerButton.disabled = false;
-            }
 
         } else {
             iconContainer.setAttribute("class", "fa fa-times-circle");
             console.log(`Wrong Answer \nPlayer Total Score: ${playerScore}`);
+        }
+
+        // Change the gameState
+        // // Disable header button when start has been selected
+            // if(isAnswer.toLowerCase() === "start"){ 
+            //     headerButton.disabled = true;
+            // } else if (isAnswer.toLowerCase() === "end"){
+            //     headerButton.disabled = false;
+            // }
+        switch(gameState){
+
+            case "start":
+                console.log("Made it to the place I was hoping");
+                break;
+            case "active":
+                break;
+            case "end":
+                break;
+
         }
     }
 });
