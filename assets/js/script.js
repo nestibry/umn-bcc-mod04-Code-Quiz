@@ -15,9 +15,16 @@ console.log(initQuestions);
 var arrQuestions = initQuestions.slice(0); // seed the arrQuestions to be manipulate, maintain a single source of truht with initQuestions
 
 
-var gameState = "active";  // start || active || end
+var gameState = "start";  // start || active || end
+console.log(`Starting Game. gameState: ${gameState}`);
 
 function renderMainContainer() {
+
+    // Clear the main container to get ready for the new rendering
+    promptContainer.textContent = "";
+    for(var j = (buttonContainer.children.length - 1); j >= 0; j--) {
+        buttonContainer.children[j].remove();
+    }
 
     switch(gameState){
         case "start":
@@ -30,16 +37,15 @@ function renderMainContainer() {
             newElement.setAttribute("style", "font-size:3rem"); // only updates this singular button element and not future buttons
             newElement.textContent = "START";
             buttonContainer.appendChild(newElement);
+            
+            gameState = "active";
+            console.log(`Loading Questions... gameState: ${gameState}`);
             break;
         
         case "active":
-            // Clear the button container to get ready for the new question's buttons
-            for(var j = (buttonContainer.children.length - 1); j >= 0; j--) {
-                buttonContainer.children[j].remove();
-            }
-        
             // render question prompt and buttons
             // Check that there are questions remaining, if none remaining go to gameEnd()
+            console.log(`arrQuestions.length: ${arrQuestions.length}`)
             if(arrQuestions.length > 0){
 
                 // Choose last item from shuffled arrQuestions and remove item so it doesn't get repeated
@@ -60,17 +66,41 @@ function renderMainContainer() {
                         console.log(`Prompt: ${newQuestion.prompt} \nCorrect Choice #: ${i+1} \n${arrChoices[i].text} \nPoints: ${newQuestion.points}`)
                     }
                 }
-            } else {
-                console.log("Game Over");
-            }
-
+                if (arrQuestions.length === 0) {
+                    gameState = "end";
+                    console.log(`Game Over. gameState: ${gameState}`);
+                }
+            } 
             break;
         
 
         case "end":
+            // Render Prompt field
+            promptContainer.textContent = "Thanks for taking the Quiz! Enter initials then click 'SUBMIT'";
+            console.log(`Prompt: ${promptContainer.textContent}`);
+
+
+            // Render Input field
+            var newElement = document.createElement("input");
+            newElement.setAttribute("type", "text");
+            newElement.setAttribute("placeholder", "Enter Initials...");
+            newElement.setAttribute("name","player-name");
+            newElement.setAttribute("id","player-name");
+            buttonContainer.appendChild(newElement);
+            
+            
+            // Render SUBMIT button
+            var newElement = document.createElement("button");
+            newElement.setAttribute("data-answer", "end");    // Submit button
+            newElement.setAttribute("data-points", "0");    // However, no points for starting the quiz...lol
+            newElement.setAttribute("style", "font-size:3rem"); // only updates this singular button element and not future buttons
+            newElement.textContent = "SUBMIT";
+            buttonContainer.appendChild(newElement);
+
+            gameState = "start";
+            console.log(`Re-starting game... gameState: ${gameState}`);
             break;
     }
-
 }
 
 
