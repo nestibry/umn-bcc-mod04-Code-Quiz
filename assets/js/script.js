@@ -34,7 +34,6 @@ function setTime() {
             // Stops execution of action at set interval and reset timer
             clearInterval(timerInterval);
             subHeaderEl.textContent = "";
-            secondsLeft = quizTimeLength;
             // End Game and go to submission screen
             gameState = "end";
             renderMainContainer();
@@ -106,6 +105,8 @@ function renderMainContainer() {
             // Reset player variables
             playerScore = 0;
             playerName = "";
+            secondsLeft = quizTimeLength;
+            subHeaderEl.textContent = secondsLeft + "  Seconds Remaining";
             break;
         
         case "active":
