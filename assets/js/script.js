@@ -147,6 +147,9 @@ function initializeStart(promptText = "Click 'START' to begin the Quiz") {
 
     buttonContainer.appendChild(newElement);
 
+    // Enable the High Scores Button
+    headerButton.disabled = false;
+
     // Shuffle the initial Questions array to randomize the Questions order using the Durstenfeld shuffle algorithm --> Source: (Stack Overflow - See post by Laurens Holst and edited by ashleedawg) --> [How To Randomly Shuffle a JavaScript Array - Durstenfeld Shuffle](https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array)
     arrQuestions = initQuestions.slice(0);
     for(var i = arrQuestions.length - 1; i > 0; i--) {
