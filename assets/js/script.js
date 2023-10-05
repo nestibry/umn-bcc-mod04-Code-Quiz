@@ -82,10 +82,14 @@ function renderMainContainer() {
 
         case "end":
             // Render Prompt field
-            promptContainer.textContent = "Thanks for taking the Quiz! Enter initials then click 'SUBMIT'";
+            promptContainer.textContent = "Thanks for taking the Coding Quiz!";
             console.log(`Prompt: ${promptContainer.textContent}`);
 
-
+            // Render Score Field
+            var newElement = document.createElement("h2");
+            newElement.textContent = "Your Score: " + playerScore;
+            buttonContainer.appendChild(newElement);
+            
             // Render Input field
             var newElement = document.createElement("input");
             newElement.setAttribute("type", "text");
@@ -177,7 +181,7 @@ buttonContainer.addEventListener("click", function(event){
                 console.log(inputField.value);
                 playerName = inputField.value;
                 gameState = "start";
-                console.log(`Submitted ${playerName}'s Score. Going back to Start... gameState: ${gameState}`);
+                console.log(`Submitted ${playerName}'s score of ${playerScore}. Going back to Start... gameState: ${gameState}`);
                 renderMainContainer();
                 break;
 
