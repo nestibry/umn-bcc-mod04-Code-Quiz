@@ -10,7 +10,7 @@
 // localStorage.setItem('highScores', JSON.stringify(highScores));
 
 // 
-var initQuestions = [
+const initQuestions = [
     {
         id:0, 
         points:"500",
