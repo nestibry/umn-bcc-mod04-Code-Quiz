@@ -5,6 +5,7 @@ var iconContainer = window.document.querySelector("#icon");
 var headerButton = window.document.querySelector(".header-button");
 var playerScore = 0;
 var playerName = "";
+var iconState = true;  // correct := true, wrong := false
 
 
 var highScores = JSON.parse(localStorage.getItem('highScores')) || [];    // Null || empty array []
@@ -127,25 +128,23 @@ buttonContainer.addEventListener("click", function(event){
         var points = element.getAttribute("data-points");
         console.log(`isAnswer: ${isAnswer} \npoints: ${points} \ngameState: ${gameState}`);
 
-        // // Cases --> If Correct Answer: Add points --> If Wrong Answer: Subtract time
-        // if(isAnswer.toLowerCase() === "yes" || isAnswer.toLowerCase() === "y" || isAnswer == 1 || isAnswer.toLowerCase() === "start" || isAnswer.toLowerCase() === "end"){
-        //     playerScore += (points * 1);
-        //     iconContainer.setAttribute("class", "fa fa-check-circle");
-        //     console.log(`Correct! \nPlayer Total Score: ${playerScore}`);
+        // Cases --> If Correct Answer: Add points --> If Wrong Answer: Subtract time
+        if(isAnswer.toLowerCase() === "yes" || isAnswer.toLowerCase() === "y" || isAnswer == 1 || isAnswer.toLowerCase() === "start" || isAnswer.toLowerCase() === "end"){
+            playerScore += (points * 1);
+            iconContainer.setAttribute("class", "fa fa-check-circle");
+            console.log(`Correct! \nPlayer Total Score: ${playerScore}`);
             
-        //     // Disable header button when start has been selected
-        //     if(isAnswer.toLowerCase() === "start"){ 
-        //         headerButton.disabled = true;
-        //     } else if (isAnswer.toLowerCase() === "end"){
-        //         // Initialize Start prompt and button
-        //         var promptText = "Thanks for taking the Quiz! Click 'START' to re-take the Quiz.";
-        //         initializeStart(promptText);
-        //     }
+            // Disable header button when start has been selected
+            if(isAnswer.toLowerCase() === "start"){ 
+                headerButton.disabled = true;
+            } else if (isAnswer.toLowerCase() === "end"){
+                headerButton.disabled = false;
+            }
 
-        // } else {
-        //     iconContainer.setAttribute("class", "fa fa-times-circle");
-        //     console.log(`Wrong Answer \nPlayer Total Score: ${playerScore}`);
-        // }
+        } else {
+            iconContainer.setAttribute("class", "fa fa-times-circle");
+            console.log(`Wrong Answer \nPlayer Total Score: ${playerScore}`);
+        }
     }
 });
 
