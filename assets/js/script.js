@@ -39,6 +39,10 @@ function setTime() {
             renderMainContainer();
         } 
 
+        // Add case to show icon for 1 second
+
+        // Add case to remove time when incorrect
+
     }, 1000);
 }
 
