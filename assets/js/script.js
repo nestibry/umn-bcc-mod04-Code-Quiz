@@ -13,7 +13,8 @@ var playerName = "";
 let gameState = "start";  // start || active || end
 var iconState = true;  // correct := true, wrong := false
 var arrQuestions = []; // seed the arrQuestions to be manipulate, maintain a single source of truht with initQuestions
-var secondsLeft = 20;
+const quizTimeLength = 20;
+var secondsLeft = quizTimeLength;
 subHeaderEl.textContent = secondsLeft + "  Seconds Remaining";
 
 console.log(`Loading Coding Quiz Script....`);
@@ -27,13 +28,17 @@ function setTime() {
     var timerInterval = setInterval(function(){
 
         secondsLeft--;
-        subHeaderEl.textContent = secondsLeft + "  Seconds Remaining";
+        subHeaderEl.textContent = [secondsLeft] + "  Seconds Remaining";
 
-        if(secondsLeft === 0) {
-            // Stops execution of action at set interval
+        if(secondsLeft === 0 || gameState === "end") {
+            // Stops execution of action at set interval and reset timer
             clearInterval(timerInterval);
-            subHeaderEl.textContent = "Times Up!";
-        }
+            subHeaderEl.textContent = "";
+            secondsLeft = quizTimeLength;
+            // End Game and go to submission screen
+            gameState = "end";
+            renderMainContainer();
+        } 
 
     }, 1000);
 }
