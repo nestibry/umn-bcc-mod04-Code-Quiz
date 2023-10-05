@@ -12,6 +12,7 @@ var playerName = "";
 
 let gameState = "start";  // start || active || end
 var iconState = true;  // correct := true, wrong := false
+var isCorrectState = false;
 var arrQuestions = []; // seed the arrQuestions to be manipulate, maintain a single source of truht with initQuestions
 const quizTimeLength = 20;
 var secondsLeft = quizTimeLength;
@@ -194,10 +195,12 @@ buttonContainer.addEventListener("click", function(event){
         if(isAnswer == 1 || isAnswer === true || isAnswer == "true"){
             playerScore += (points * 1);
             iconContainer.setAttribute("class", "fa fa-check-circle");
+            isCorrectState = true;
             console.log(`Correct! \nPlayer Total Score: ${playerScore}`);
 
         } else {
             iconContainer.setAttribute("class", "fa fa-times-circle");
+            isCorrectState = false;
             console.log(`Wrong Answer \nPlayer Total Score: ${playerScore}`);
         }
 
