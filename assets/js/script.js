@@ -17,7 +17,7 @@ console.log(initQuestions);
 var arrQuestions = initQuestions.slice(0); // seed the arrQuestions to be manipulate, maintain a single source of truht with initQuestions
 
 
-var gameState = "start";  // start || active || end
+let gameState = "start";  // start || active || end
 console.log(`Starting Game. gameState: ${gameState}`);
 
 function renderMainContainer() {
@@ -44,7 +44,7 @@ function renderMainContainer() {
             // Add in Shuffle Questions (and their choices) function call
 
             // gameState = "active";
-            console.log(`Loading Questions... gameState: ${gameState}`);
+            console.log(`At the Start... gameState: ${gameState}`);
             break;
         
         case "active":
@@ -154,9 +154,15 @@ buttonContainer.addEventListener("click", function(event){
         switch(gameState){
 
             case "start":
-                console.log("Made it to the place I was hoping");
+                // Change to active state
+                gameState = "active";
+                console.log(`Loading Questions... gameState: ${gameState}`);
+                renderMainContainer();
                 break;
             case "active":
+                // Keep in active state (state changes if the arrQuestions.length is 0)
+                console.log(`Loading More Questions... gameState: ${gameState}`);
+                renderMainContainer();
                 break;
             case "end":
                 break;
