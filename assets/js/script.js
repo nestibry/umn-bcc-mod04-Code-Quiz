@@ -34,7 +34,8 @@ function renderMainContainer() {
             promptContainer.textContent = "Click 'START' to begin the Quiz";
             console.log(`Prompt: ${promptContainer.textContent}`);
             var newElement= document.createElement("button");
-            newElement.setAttribute("data-answer", "start");    // Start button ... used to disable header button
+            // newElement.setAttribute("data-answer", "start");    // Start button ... used to disable header button
+            newElement.setAttribute("data-answer", true);    // Start button ... used to disable header button
             newElement.setAttribute("data-points", "0");    // However, no points for starting the quiz...lol
             newElement.setAttribute("style", "font-size:3rem"); // only updates this singular button element and not future buttons
             newElement.textContent = "START";
@@ -64,7 +65,8 @@ function renderMainContainer() {
                     newElement.textContent = arrChoices[i].text;
                     buttonContainer.appendChild(newElement);
                     // Console log the correct answer
-                    if(arrChoices[i].isAnswer.toLowerCase() === "yes" || arrChoices[i].isAnswer.toLowerCase() === "y" || arrChoices[i].isAnswer == 1) {
+                    // if(arrChoices[i].isAnswer.toLowerCase() === "yes" || arrChoices[i].isAnswer.toLowerCase() === "y" || arrChoices[i].isAnswer == 1) {
+                    if(arrChoices[i].isAnswer === true || arrChoices[i].isAnswer == "true") {
                         console.log(`Prompt: ${newQuestion.prompt} \nCorrect Choice #: ${i+1} \n${arrChoices[i].text} \nPoints: ${newQuestion.points}`)
                     }
                 }
@@ -93,7 +95,7 @@ function renderMainContainer() {
             
             // Render SUBMIT button
             var newElement = document.createElement("button");
-            newElement.setAttribute("data-answer", "end");    // Submit button
+            newElement.setAttribute("data-answer", true);    // Submit button
             newElement.setAttribute("data-points", "0");    // However, no points for starting the quiz...lol
             newElement.setAttribute("style", "font-size:3rem"); // only updates this singular button element and not future buttons
             newElement.addEventListener("click", function(){
@@ -129,7 +131,8 @@ buttonContainer.addEventListener("click", function(event){
         console.log(`isAnswer: ${isAnswer} \npoints: ${points} \ngameState: ${gameState}`);
 
         // Cases --> If Correct Answer: Add points --> If Wrong Answer: Subtract time
-        if(isAnswer.toLowerCase() === "yes" || isAnswer.toLowerCase() === "y" || isAnswer == 1 || isAnswer.toLowerCase() === "start" || isAnswer.toLowerCase() === "end"){
+        // if(isAnswer.toLowerCase() === "yes" || isAnswer.toLowerCase() === "y" || isAnswer == 1 || isAnswer.toLowerCase() === "start" || isAnswer.toLowerCase() === "end"){
+        if(isAnswer == 1 || isAnswer === true || isAnswer == "true"){
             playerScore += (points * 1);
             iconContainer.setAttribute("class", "fa fa-check-circle");
             console.log(`Correct! \nPlayer Total Score: ${playerScore}`);

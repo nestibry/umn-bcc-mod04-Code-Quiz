@@ -16,10 +16,10 @@ const initQuestions = [
         points:"500",
         prompt:`How could you use pseudo-elements to display the message, 'Thanks for checking the box!', after a user clicks on a check box?`, 
         choices:[
-            {isAnswer:"1", text:`.checkbox:checked + label::after {content: "Thanks for checking the box!";}`}, 
-            {isAnswer:"0", text:`.checkbox:checked + label:: after {message:"Thanks for checking the box!";}`}, 
-            {isAnswer:"0", text:`.checkbox + label {message:"Thanks for checking the box!";}`},
-            {isAnswer:"0", text:`.checkbox + label {content:"Thanks for checking the box!";}`}
+            {isAnswer:true, text:`.checkbox:checked + label::after {content: "Thanks for checking the box!";}`}, 
+            {isAnswer:false, text:`.checkbox:checked + label:: after {message:"Thanks for checking the box!";}`}, 
+            {isAnswer:false, text:`.checkbox + label {message:"Thanks for checking the box!";}`},
+            {isAnswer:false, text:`.checkbox + label {content:"Thanks for checking the box!";}`}
         ]
     },
     {
@@ -27,10 +27,10 @@ const initQuestions = [
         points:"100",
         prompt:`What is wireframing?`, 
         choices:[
-            {isAnswer:"1", text:`A blueprint of our website's page layout.`}, 
-            {isAnswer:"0", text:`A 3D model of our websites structure made from wires.`}, 
-            {isAnswer:"0", text:`A CSS library that helps in the creation of borders around our boxed elements.`},
-            {isAnswer:"0", text:`Wireframing helps us quickly set up our HTML page.`}
+            {isAnswer:true, text:`A blueprint of our website's page layout.`}, 
+            {isAnswer:false, text:`A 3D model of our websites structure made from wires.`}, 
+            {isAnswer:false, text:`A CSS library that helps in the creation of borders around our boxed elements.`},
+            {isAnswer:false, text:`Wireframing helps us quickly set up our HTML page.`}
         ]
     },
     {
@@ -38,10 +38,10 @@ const initQuestions = [
         points:"200",
         prompt:`How is Flexbox related to mobile-first design?`, 
         choices:[
-            {isAnswer:"1", text:`The flex layout allows responsive elements within a container to be automatically arranged depending upon screen size (or device).`}, 
-            {isAnswer:"0", text:`The flex layout allows developers to design the mobile user interface first, then other screen resolutions and devices.`}, 
-            {isAnswer:"0", text:`The flex layout allows non-responsive elements within a container to behave as responsive elements depending upon screen size (or device).`},
-            {isAnswer:"0", text:`The flex layout allows for the user to select an interface based on the screen size (or device).`}
+            {isAnswer:true, text:`The flex layout allows responsive elements within a container to be automatically arranged depending upon screen size (or device).`}, 
+            {isAnswer:false, text:`The flex layout allows developers to design the mobile user interface first, then other screen resolutions and devices.`}, 
+            {isAnswer:false, text:`The flex layout allows non-responsive elements within a container to behave as responsive elements depending upon screen size (or device).`},
+            {isAnswer:false, text:`The flex layout allows for the user to select an interface based on the screen size (or device).`}
         ]
     },
 ];
