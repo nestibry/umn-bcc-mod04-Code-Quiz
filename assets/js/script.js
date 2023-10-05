@@ -3,6 +3,7 @@ var promptContainer = window.document.querySelector(".prompt");  // child of mai
 var buttonContainer = window.document.querySelector(".buttons"); // child of mainContainer
 var iconContainer = window.document.querySelector("#icon");
 var headerButton = window.document.querySelector(".header-button");
+var highScoresLink = headerButton.getAttribute("href");
 var playerScore = 0;
 var playerName = "";
 var iconState = true;  // correct := true, wrong := false
@@ -82,6 +83,8 @@ function renderMainContainer() {
             // Reset player variables
             playerScore = 0;
             playerName = "";
+            // headerButton.disabled = true;
+            // headerButton.setAttribute("href", "javascript:void(0)");
 
             // gameState = "active";
             console.log(`At the Start... gameState: ${gameState}`);
@@ -200,6 +203,9 @@ buttonContainer.addEventListener("click", function(event){
             case "start":
                 // Change to active state
                 gameState = "active";
+    
+                // Disable High Scores Link during the Quiz
+                headerButton.setAttribute("href", "javascript:void(0)");
                 console.log(`Loading Questions... gameState: ${gameState}`);
                 renderMainContainer();
                 break;
@@ -221,6 +227,9 @@ buttonContainer.addEventListener("click", function(event){
                 console.log(inputField.value);
                 playerName = inputField.value;
                 gameState = "start";
+
+                // Enable High Scores Link
+                headerButton.setAttribute("href", highScoresLink);
                 console.log(`Submitted ${playerName}'s score of ${playerScore}. Going back to Start... gameState: ${gameState}`);
                 renderMainContainer();
                 break;
