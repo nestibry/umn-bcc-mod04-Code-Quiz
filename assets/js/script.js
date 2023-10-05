@@ -4,6 +4,7 @@ var buttonContainer = window.document.querySelector(".buttons"); // child of mai
 var iconContainer = window.document.querySelector("#icon");
 var headerButton = window.document.querySelector(".header-button");
 var playerScore = 0;
+var playerName = "";
 
 
 var highScores = JSON.parse(localStorage.getItem('highScores')) || [];    // Null || empty array []
@@ -94,6 +95,11 @@ function renderMainContainer() {
             newElement.setAttribute("data-answer", "end");    // Submit button
             newElement.setAttribute("data-points", "0");    // However, no points for starting the quiz...lol
             newElement.setAttribute("style", "font-size:3rem"); // only updates this singular button element and not future buttons
+            newElement.addEventListener("click", function(){
+                var inputField = document.querySelector("#player-name");
+                console.log(inputField.value);
+                playerName = inputField.value;
+            })
             newElement.textContent = "SUBMIT";
             buttonContainer.appendChild(newElement);
 
@@ -102,13 +108,45 @@ function renderMainContainer() {
             break;
     }
 }
-
-
-
-
-
-
 renderMainContainer();
+
+
+// buttonContainer.addEventListener("click", function(event){
+
+//     event.stopPropagation();
+    
+//     // Get the button pressed AND see if it is the correct answer
+//     var element = event.target;
+
+//     // Check if the clicked element was a button...if a button, then do the following:
+//     if (element.matches("button")) {
+    
+//         // Collect data attributes from button
+//         var isAnswer = element.getAttribute("data-answer");
+//         var points = element.getAttribute("data-points");
+//         // console.log(`Points: ${points}`);
+
+//         // Cases --> If Correct Answer: Add points --> If Wrong Answer: Subtract time
+//         if(isAnswer.toLowerCase() === "yes" || isAnswer.toLowerCase() === "y" || isAnswer == 1 || isAnswer.toLowerCase() === "start" || isAnswer.toLowerCase() === "end"){
+//             playerScore += (points * 1);
+//             iconContainer.setAttribute("class", "fa fa-check-circle");
+//             console.log(`Correct! \nPlayer Total Score: ${playerScore}`);
+            
+//             // Disable header button when start has been selected
+//             if(isAnswer.toLowerCase() === "start"){ 
+//                 headerButton.disabled = true;
+//             } else if (isAnswer.toLowerCase() === "end"){
+//                 // Initialize Start prompt and button
+//                 var promptText = "Thanks for taking the Quiz! Click 'START' to re-take the Quiz.";
+//                 initializeStart(promptText);
+//             }
+
+//         } else {
+//             iconContainer.setAttribute("class", "fa fa-times-circle");
+//             console.log(`Wrong Answer \nPlayer Total Score: ${playerScore}`);
+//         }
+//     }
+// });
 
 
 
