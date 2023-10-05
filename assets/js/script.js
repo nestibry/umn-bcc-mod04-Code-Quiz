@@ -14,7 +14,7 @@ var highScores = JSON.parse(localStorage.getItem('highScores')) || [];    // Nul
 // Array of Questions [ Initial Array is created in data.js and loaded first in index.html ]
 console.log("Initial Array of Questions:");
 console.log(initQuestions);
-var arrQuestions = initQuestions.slice(0); // seed the arrQuestions to be manipulate, maintain a single source of truht with initQuestions
+var arrQuestions = []; // seed the arrQuestions to be manipulate, maintain a single source of truht with initQuestions
 
 
 let gameState = "start";  // start || active || end
@@ -23,9 +23,16 @@ console.log(`Starting Game. gameState: ${gameState}`);
 
 function shuffleQuestions() {
 
-    // seed the arrQuestions to be manipulate, maintain a single source of truht with initQuestions
-    arrQuestions = initQuestions.slice(0); // seed the arrQuestions to be manipulate, maintain a single source of truth with initQuestions
-
+    // Seed the arrQuestions to be manipulate, maintain a single source of truht with initQuestions
+    arrQuestions = initQuestions.slice(0);
+    
+    // Shuffle the initial Questions array to randomize the Questions order using the Durstenfeld shuffle algorithm --> Source: (Stack Overflow - See post by Laurens Holst and edited by ashleedawg) --> [How To Randomly Shuffle a JavaScript Array - Durstenfeld Shuffle](https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array)
+    for(var i = arrQuestions.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = arrQuestions[i];
+        arrQuestions[i] = arrQuestions[j];
+        arrQuestions[j] = temp;
+    }    
 }
 
 
