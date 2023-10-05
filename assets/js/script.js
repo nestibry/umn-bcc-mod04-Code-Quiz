@@ -20,6 +20,8 @@ var arrQuestions;
 //
 buttonContainer.addEventListener("click", function(event){
 
+    event.stopPropagation();
+
     // Get the button pressed AND see if it is the correct answer
     var element = event.target;
 
@@ -32,7 +34,7 @@ buttonContainer.addEventListener("click", function(event){
         // console.log(`Points: ${points}`);
 
         // Cases --> If Correct Answer: Add points --> If Wrong Answer: Subtract time
-        if(isAnswer.toLowerCase() === "yes" || isAnswer.toLowerCase() === "y" || isAnswer == 1 || isAnswer.toLowerCase() === "start"){
+        if(isAnswer.toLowerCase() === "yes" || isAnswer.toLowerCase() === "y" || isAnswer == 1 || isAnswer.toLowerCase() === "start" || isAnswer.toLowerCase() === "end"){
             playerScore += (points * 1);
             iconContainer.setAttribute("class", "fa fa-check-circle");
             console.log(`Correct! \nPlayer Total Score: ${playerScore}`);
@@ -96,12 +98,25 @@ buttonContainer.addEventListener("click", function(event){
 
 function gameEnd() {
     
-    // Input and button to trigger capture
-    promptContainer.textContent = "Enter initials then click 'SUBMIT'";
+    // Render Prompt field
+    promptContainer.textContent = "Thanks for taking the Quiz! Enter initials then click 'SUBMIT'";
     console.log(`Prompt: ${promptContainer.textContent}`);
 
-    var newElement= document.createElement("button");
-    newElement.setAttribute("data-answer", "end");    // Submit button ... used to disable header button
+
+    // Render Input field
+    var newElement = document.createElement("input");
+    newElement.setAttribute("type", "text");
+    newElement.setAttribute("placeholder", "Enter Initials...");
+    newElement.setAttribute("name","player-name");
+    newElement.setAttribute("id","player-name");
+
+    buttonContainer.appendChild(newElement);
+    
+    
+    
+    // Render SUBMIT button
+    var newElement = document.createElement("button");
+    newElement.setAttribute("data-answer", "end");    // Submit button
     newElement.setAttribute("data-points", "0");    // However, no points for starting the quiz...lol
     newElement.setAttribute("style", "font-size:3rem"); // only updates this singular button element and not future buttons
     newElement.textContent = "SUBMIT";
