@@ -1,6 +1,9 @@
 // Selectors
 var highScoresEl = window.document.querySelector(".high-scores-list");
 
+// Colors 
+
+
 // Get list of High Scores from local Storage
 var highScores = JSON.parse(localStorage.getItem('highScores')) || [];    // Null OR empty array []
 
@@ -18,6 +21,12 @@ for(var i=0; i < highScores.length; i++){
     
     var li = document.createElement("li");
     li.textContent = entryStr;
+    //alternate background color
+    if(i%2===0){
+        li.setAttribute("style", "font-weight:500; color:var(--lght-cyan); background-color:var(--dark-cyan");
+    } else {
+        li.setAttribute("style", "font-weight:500; color:#17252A; background-color:var(--lght-cyan")
+    }
 
     highScoresEl.appendChild(li); 
 }

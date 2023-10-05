@@ -78,10 +78,12 @@ header h1 {
     color: var(--black-and-blue);
 }
 
-.timer {
+
+.sub-header {
     display: flex;
     flex-direction: column;
     width: 100%;
+    min-height: 55px;
     padding: 1rem;
     text-align: center;
     font-size: 2rem;   
@@ -100,6 +102,7 @@ main {
 
     /* Mobile-first layout  */
     margin: 3rem;
+    width: 90%;
 }
 
 main h2 {
@@ -110,7 +113,7 @@ main h2 {
     margin-bottom: 2rem;    
 }
 
-.buttons {
+.buttons, ol {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -118,7 +121,8 @@ main h2 {
     font-size: 1.75rem;
 }
 
-button {
+button,
+.high-scores-list li {
     text-align: center;
     padding: 1rem;
     margin: 0.5rem 0;
@@ -157,10 +161,8 @@ button:hover {
         font-size: 2.25rem;
 
     }
-    .timer {
-        align-items: flex-end;
-        padding-right: 3.5rem;
-        font-size: 2.25rem;
+    .sub-header {
+        font-size: 2.75rem;
     }
     main {
         display: flex;
