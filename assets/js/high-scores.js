@@ -23,9 +23,9 @@ for(var i=0; i < highScores.length; i++){
     li.textContent = entryStr;
     //alternate background color
     if(i%2===0){
-        li.setAttribute("style", "font-weight:500; color:#17252A; background-color:#3AAFA9");
+        li.setAttribute("style", "font-weight:500; color:var(--lght-cyan); background-color:var(--dark-cyan");
     } else {
-        li.setAttribute("style", "font-weight:500; color:#17252A; background-color:#def2f1")
+        li.setAttribute("style", "font-weight:500; color:#17252A; background-color:var(--lght-cyan")
     }
 
     highScoresEl.appendChild(li); 
