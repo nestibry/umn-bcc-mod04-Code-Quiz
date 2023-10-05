@@ -2,10 +2,10 @@
 
 // Creating an array of High Scores for demoing/debugging purposes only
 var highScores = [
-    {rank:0,  name:"BKN",    score:2000},
+    {rank:0,  name:"BKN",    score:500},
     {rank:1,  name:"BryGuy", score:1500},
-    {rank:2,  name:"MLH",    score:1000},
-    {rank:3,  name:"WHN",    score:500},
+    {rank:2,  name:"MLH",    score:100},
+    {rank:3,  name:"WHN",    score:600},
 ];
 localStorage.setItem('highScores', JSON.stringify(highScores));
 
