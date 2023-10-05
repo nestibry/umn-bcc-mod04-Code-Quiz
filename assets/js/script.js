@@ -20,6 +20,16 @@ var arrQuestions = initQuestions.slice(0); // seed the arrQuestions to be manipu
 let gameState = "start";  // start || active || end
 console.log(`Starting Game. gameState: ${gameState}`);
 
+
+function shuffleQuestions() {
+
+    // seed the arrQuestions to be manipulate, maintain a single source of truht with initQuestions
+    arrQuestions = initQuestions.slice(0); // seed the arrQuestions to be manipulate, maintain a single source of truth with initQuestions
+
+}
+
+
+
 function renderMainContainer() {
 
     // Clear the main container to get ready for the new rendering
@@ -41,7 +51,12 @@ function renderMainContainer() {
             newElement.textContent = "START";
             buttonContainer.appendChild(newElement);
             
-            // Add in Shuffle Questions (and their choices) function call
+            // Seed arrQuestions and shuffle question order (and their choices)
+            shuffleQuestions();
+
+            // Reset player variables
+            playerScore = 0;
+            playerName = "";
 
             // gameState = "active";
             console.log(`At the Start... gameState: ${gameState}`);
