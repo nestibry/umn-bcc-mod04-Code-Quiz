@@ -72,10 +72,10 @@ function renderMainContainer() {
                         console.log(`Prompt: ${newQuestion.prompt} \nCorrect Choice #: ${i+1} \n${arrChoices[i].text} \nPoints: ${newQuestion.points}`)
                     }
                 }
-                if (arrQuestions.length === 0) {
-                    gameState = "end";
-                    console.log(`Game Over. gameState: ${gameState}`);
-                }
+                // if (arrQuestions.length === 0) {
+                //     gameState = "end";
+                //     console.log(`Game Over. gameState: ${gameState}`);
+                // }
             } 
             break;
         
@@ -100,16 +100,16 @@ function renderMainContainer() {
             newElement.setAttribute("data-answer", true);    // Submit button
             newElement.setAttribute("data-points", "0");    // However, no points for starting the quiz...lol
             newElement.setAttribute("style", "font-size:3rem"); // only updates this singular button element and not future buttons
-            newElement.addEventListener("click", function(){
-                var inputField = document.querySelector("#player-name");
-                console.log(inputField.value);
-                playerName = inputField.value;
-            })
+            // newElement.addEventListener("click", function(){
+            //     var inputField = document.querySelector("#player-name");
+            //     console.log(inputField.value);
+            //     playerName = inputField.value;
+            // })
             newElement.textContent = "SUBMIT";
             buttonContainer.appendChild(newElement);
 
-            gameState = "start";
-            console.log(`Re-starting game... gameState: ${gameState}`);
+            // gameState = "start";
+            // console.log(`Re-starting game... gameState: ${gameState}`);
             break;
     }
 }
@@ -159,16 +159,25 @@ buttonContainer.addEventListener("click", function(event){
                 console.log(`Loading Questions... gameState: ${gameState}`);
                 renderMainContainer();
                 break;
+            
             case "active":
                 // Keep in active state (state changes if the arrQuestions.length is 0)
-                console.log(`Loading More Questions... gameState: ${gameState}`);
+                if (arrQuestions.length === 0) {
+                    gameState = "end";
+                    console.log(`Game Over. gameState: ${gameState}`);
+                } 
+                else {
+                    console.log(`Loading More Questions... gameState: ${gameState}`);
+                }
                 renderMainContainer();
                 break;
-            case "submit":
-                break;
+            
             case "end":
+                var inputField = document.querySelector("#player-name");
+                console.log(inputField.value);
+                playerName = inputField.value;
                 gameState = "start";
-                console.log(`Game Over. Going to Submit Screen... gameState: ${gameState}`);
+                console.log(`Submitted ${playerName}'s Score. Going back to Start... gameState: ${gameState}`);
                 renderMainContainer();
                 break;
 
