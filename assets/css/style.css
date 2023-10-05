@@ -110,7 +110,8 @@ main h2 {
     margin-bottom: 2rem;    
 }
 
-.buttons {
+.buttons,
+ol {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -118,7 +119,8 @@ main h2 {
     font-size: 1.75rem;
 }
 
-button {
+button,
+li {
     text-align: center;
     padding: 1rem;
     margin: 0.5rem 0;
@@ -172,7 +174,8 @@ button:hover {
     main h2 {
         font-size: 3rem;
     }
-    button {
+    button,
+    li {
         font-size: 2.25rem;
         padding: 2rem;
     }

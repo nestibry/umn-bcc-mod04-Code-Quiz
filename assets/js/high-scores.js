@@ -1,6 +1,9 @@
 // Selectors
 var highScoresEl = window.document.querySelector(".high-scores-list");
 
+// Colors 
+
+
 // Get list of High Scores from local Storage
 var highScores = JSON.parse(localStorage.getItem('highScores')) || [];    // Null OR empty array []
 
@@ -18,6 +21,8 @@ for(var i=0; i < highScores.length; i++){
     
     var li = document.createElement("li");
     li.textContent = entryStr;
+
+    li.setAttribute("style", "background-color:#2B7A78")
 
     highScoresEl.appendChild(li); 
 }
