@@ -32,7 +32,25 @@ function shuffleQuestions() {
         var temp = arrQuestions[i];
         arrQuestions[i] = arrQuestions[j];
         arrQuestions[j] = temp;
-    }    
+    }   
+
+    // Randomize choices array using the Durstenfeld shuffle algorithm --> Source: (Stack Overflow - See post by Laurens Holst and edited by ashleedawg) --> [How To Randomly Shuffle a JavaScript Array - Durstenfeld Shuffle](https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array)
+    for(var k=0; k < arrQuestions.length; k++) {
+        
+        // Shuffle the choices in place
+        for(var i = arrQuestions[k].choices.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = arrQuestions[k].choices[i];
+            arrQuestions[k].choices[i] = arrQuestions[k].choices[j];
+            arrQuestions[k].choices[j] = temp;
+        }
+
+    }
+    
+    console.log("Shuffled Array of Questions:");
+    console.log(arrQuestions);
+    
+    
 }
 
 
