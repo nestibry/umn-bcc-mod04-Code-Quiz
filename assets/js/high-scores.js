@@ -5,7 +5,7 @@ var highScoresEl = window.document.querySelector(".high-scores-list");
 
 
 // Get list of High Scores from local Storage
-var highScores = JSON.parse(localStorage.getItem('highScores')) || [];    // Null OR empty array []
+var highScores = JSON.parse(localStorage.getItem('highScores')) || [];    // Returns Array from local Storage OR if Null, return empty array []
 
 // Sort the High Scores in Descending order (Learned this from my tutor, Faran Navazi)
 highScores.sort((a,b) => b.score - a.score );

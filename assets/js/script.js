@@ -94,18 +94,11 @@ function gameEnd() {
 
 
 
-    // Record score
-    var playerEntry = {name:"BKN29", score:playerScore};
-    
-    
-    
+    // Record score -- this will store the scores in order of which they were recieved
+    var playerEntry = {name:"BKN--7", score:playerScore};
     highScores.push(playerEntry);  // local array
-
-
-
     localStorage.setItem('highScores', JSON.stringify(highScores));
-
-
+    playerScore = 0; // Reset the global playerScore for the next game
 
 
     // Initialize Start prompt and button
