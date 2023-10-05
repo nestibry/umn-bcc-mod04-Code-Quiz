@@ -111,42 +111,43 @@ function renderMainContainer() {
 renderMainContainer();
 
 
-// buttonContainer.addEventListener("click", function(event){
+buttonContainer.addEventListener("click", function(event){
 
-//     event.stopPropagation();
+    event.stopPropagation();
+    event.preventDefault();
     
-//     // Get the button pressed AND see if it is the correct answer
-//     var element = event.target;
+    // Get the button pressed AND see if it is the correct answer
+    var element = event.target;
 
-//     // Check if the clicked element was a button...if a button, then do the following:
-//     if (element.matches("button")) {
+    // Check if the clicked element was a button...if a button, then do the following:
+    if (element.matches("button")) {
     
-//         // Collect data attributes from button
-//         var isAnswer = element.getAttribute("data-answer");
-//         var points = element.getAttribute("data-points");
-//         // console.log(`Points: ${points}`);
+        // Collect data attributes from button
+        var isAnswer = element.getAttribute("data-answer");
+        var points = element.getAttribute("data-points");
+        console.log(`isAnswer: ${isAnswer} \npoints: ${points} \ngameState: ${gameState}`);
 
-//         // Cases --> If Correct Answer: Add points --> If Wrong Answer: Subtract time
-//         if(isAnswer.toLowerCase() === "yes" || isAnswer.toLowerCase() === "y" || isAnswer == 1 || isAnswer.toLowerCase() === "start" || isAnswer.toLowerCase() === "end"){
-//             playerScore += (points * 1);
-//             iconContainer.setAttribute("class", "fa fa-check-circle");
-//             console.log(`Correct! \nPlayer Total Score: ${playerScore}`);
+        // // Cases --> If Correct Answer: Add points --> If Wrong Answer: Subtract time
+        // if(isAnswer.toLowerCase() === "yes" || isAnswer.toLowerCase() === "y" || isAnswer == 1 || isAnswer.toLowerCase() === "start" || isAnswer.toLowerCase() === "end"){
+        //     playerScore += (points * 1);
+        //     iconContainer.setAttribute("class", "fa fa-check-circle");
+        //     console.log(`Correct! \nPlayer Total Score: ${playerScore}`);
             
-//             // Disable header button when start has been selected
-//             if(isAnswer.toLowerCase() === "start"){ 
-//                 headerButton.disabled = true;
-//             } else if (isAnswer.toLowerCase() === "end"){
-//                 // Initialize Start prompt and button
-//                 var promptText = "Thanks for taking the Quiz! Click 'START' to re-take the Quiz.";
-//                 initializeStart(promptText);
-//             }
+        //     // Disable header button when start has been selected
+        //     if(isAnswer.toLowerCase() === "start"){ 
+        //         headerButton.disabled = true;
+        //     } else if (isAnswer.toLowerCase() === "end"){
+        //         // Initialize Start prompt and button
+        //         var promptText = "Thanks for taking the Quiz! Click 'START' to re-take the Quiz.";
+        //         initializeStart(promptText);
+        //     }
 
-//         } else {
-//             iconContainer.setAttribute("class", "fa fa-times-circle");
-//             console.log(`Wrong Answer \nPlayer Total Score: ${playerScore}`);
-//         }
-//     }
-// });
+        // } else {
+        //     iconContainer.setAttribute("class", "fa fa-times-circle");
+        //     console.log(`Wrong Answer \nPlayer Total Score: ${playerScore}`);
+        // }
+    }
+});
 
 
 
