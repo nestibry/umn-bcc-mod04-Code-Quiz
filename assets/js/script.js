@@ -1,6 +1,6 @@
 // Global Variables
-var promptContainer = window.document.querySelector(".prompt");
-var buttonContainer = window.document.querySelector(".buttons");
+var promptContainer = window.document.querySelector(".prompt");  // child of mainContainer
+var buttonContainer = window.document.querySelector(".buttons"); // child of mainContainer
 var iconContainer = window.document.querySelector("#icon");
 var headerButton = window.document.querySelector(".header-button");
 var playerScore = 0;
@@ -15,179 +15,222 @@ console.log(initQuestions);
 var arrQuestions;
 
 
+var gameState = "start";  // start || active || end
 
+function renderMainContainer() {
 
-//
-buttonContainer.addEventListener("click", function(event){
-
-    event.stopPropagation();
-
-    // Get the button pressed AND see if it is the correct answer
-    var element = event.target;
-
-    // Check if the clicked element was a button...if a button, then do the following:
-    if (element.matches("button")) {
+    switch(gameState){
+        case "start":
+            // Initialize Start prompt and button
+            promptContainer.textContent = "Click 'START' to begin the Quiz";
+            console.log(`Prompt: ${promptContainer.textContent}`);
+            var newElement= document.createElement("button");
+            newElement.setAttribute("data-answer", "start");    // Start button ... used to disable header button
+            newElement.setAttribute("data-points", "0");    // However, no points for starting the quiz...lol
+            newElement.setAttribute("style", "font-size:3rem"); // only updates this singular button element and not future buttons
+            newElement.textContent = "START";
+            buttonContainer.appendChild(newElement);
+            break;
         
-        // Collect data attributes from button
-        var isAnswer = element.getAttribute("data-answer");
-        var points = element.getAttribute("data-points");
-        // console.log(`Points: ${points}`);
-
-        // Cases --> If Correct Answer: Add points --> If Wrong Answer: Subtract time
-        if(isAnswer.toLowerCase() === "yes" || isAnswer.toLowerCase() === "y" || isAnswer == 1 || isAnswer.toLowerCase() === "start" || isAnswer.toLowerCase() === "end"){
-            playerScore += (points * 1);
-            iconContainer.setAttribute("class", "fa fa-check-circle");
-            console.log(`Correct! \nPlayer Total Score: ${playerScore}`);
-            // Disable header button when start has been selected
-            if(isAnswer.toLowerCase() === "start"){ 
-                headerButton.disabled = true;
-            } else if (isAnswer.toLowerCase() === "end"){
-                // Initialize Start prompt and button
-                var promptText = "Thanks for taking the Quiz! Click 'START' to re-take the Quiz.";
-                initializeStart(promptText);
-            }
-
-        } else {
-            iconContainer.setAttribute("class", "fa fa-times-circle");
-            console.log(`Wrong Answer \nPlayer Total Score: ${playerScore}`);
-        }
-
-        // Clear the button container to get ready for the new question's buttons
-        for(var j = (buttonContainer.children.length - 1); j >= 0; j--) {
-            buttonContainer.children[j].remove();
-        }
+        case "active":
+            break;
         
-        // Check that there are questions remaining, if none remaining go to gameEnd()
-        if (arrQuestions.length > 0) {
+        case "end":
+            break;
+    }
 
-            // Choose last item from shuffled arrQuestions and remove item so it doesn't get repeated
-            var newQuestion = arrQuestions[ arrQuestions.length - 1 ]; // Get the last element in the array
-            arrQuestions.pop(); // Remove the last element in the array
+}
 
-            promptContainer.textContent = newQuestion.prompt;
-            console.log(`Prompt: ${newQuestion.prompt}`);
 
-            // Randomize choices array using the Durstenfeld shuffle algorithm --> Source: (Stack Overflow - See post by Laurens Holst and edited by ashleedawg) --> [How To Randomly Shuffle a JavaScript Array - Durstenfeld Shuffle](https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array)
-            var arrChoices = newQuestion.choices.slice(0);
-            for(var i = arrChoices.length - 1; i > 0; i--) {
-                var j = Math.floor(Math.random() * (i + 1));
-                var temp = arrChoices[i];
-                arrChoices[i] = arrChoices[j];
-                arrChoices[j] = temp;
-            }
+
+
+
+
+renderMainContainer();
+
+
+
+
+
+
+
+
+
+
+
+
+
+// //
+// buttonContainer.addEventListener("click", function(event){
+
+//     event.stopPropagation();
+
+//     // Get the button pressed AND see if it is the correct answer
+//     var element = event.target;
+
+//     // Check if the clicked element was a button...if a button, then do the following:
+//     if (element.matches("button")) {
+        
+//         // Collect data attributes from button
+//         var isAnswer = element.getAttribute("data-answer");
+//         var points = element.getAttribute("data-points");
+//         // console.log(`Points: ${points}`);
+
+//         // Cases --> If Correct Answer: Add points --> If Wrong Answer: Subtract time
+//         if(isAnswer.toLowerCase() === "yes" || isAnswer.toLowerCase() === "y" || isAnswer == 1 || isAnswer.toLowerCase() === "start" || isAnswer.toLowerCase() === "end"){
+//             playerScore += (points * 1);
+//             iconContainer.setAttribute("class", "fa fa-check-circle");
+//             console.log(`Correct! \nPlayer Total Score: ${playerScore}`);
+//             // Disable header button when start has been selected
+//             if(isAnswer.toLowerCase() === "start"){ 
+//                 headerButton.disabled = true;
+//             } else if (isAnswer.toLowerCase() === "end"){
+//                 // Initialize Start prompt and button
+//                 var promptText = "Thanks for taking the Quiz! Click 'START' to re-take the Quiz.";
+//                 initializeStart(promptText);
+//             }
+
+//         } else {
+//             iconContainer.setAttribute("class", "fa fa-times-circle");
+//             console.log(`Wrong Answer \nPlayer Total Score: ${playerScore}`);
+//         }
+
+//         // Clear the button container to get ready for the new question's buttons
+//         for(var j = (buttonContainer.children.length - 1); j >= 0; j--) {
+//             buttonContainer.children[j].remove();
+//         }
+        
+//         // Check that there are questions remaining, if none remaining go to gameEnd()
+//         if (arrQuestions.length > 0) {
+
+//             // Choose last item from shuffled arrQuestions and remove item so it doesn't get repeated
+//             var newQuestion = arrQuestions[ arrQuestions.length - 1 ]; // Get the last element in the array
+//             arrQuestions.pop(); // Remove the last element in the array
+
+//             promptContainer.textContent = newQuestion.prompt;
+//             console.log(`Prompt: ${newQuestion.prompt}`);
+
+//             // Randomize choices array using the Durstenfeld shuffle algorithm --> Source: (Stack Overflow - See post by Laurens Holst and edited by ashleedawg) --> [How To Randomly Shuffle a JavaScript Array - Durstenfeld Shuffle](https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array)
+//             var arrChoices = newQuestion.choices.slice(0);
+//             for(var i = arrChoices.length - 1; i > 0; i--) {
+//                 var j = Math.floor(Math.random() * (i + 1));
+//                 var temp = arrChoices[i];
+//                 arrChoices[i] = arrChoices[j];
+//                 arrChoices[j] = temp;
+//             }
             
-            // Add Choice buttons to the page
-            for(var i=0; i < arrChoices.length; i++) {
-                var newElement= document.createElement("button");
-                newElement.setAttribute("data-answer", arrChoices[i].isAnswer);
-                newElement.setAttribute("data-points", newQuestion.points);
-                newElement.textContent = arrChoices[i].text;
-                buttonContainer.appendChild(newElement);
-                // Console log the correct answer
-                if(arrChoices[i].isAnswer.toLowerCase() === "yes" || arrChoices[i].isAnswer.toLowerCase() === "y" || arrChoices[i].isAnswer == 1) {
-                    console.log(`Correct Answer: \nPoints: ${newQuestion.points} \nChoice #: ${i+1} \n${arrChoices[i].text}`)
-                }
-            }
-        } else {
-            gameEnd();
-        }
+//             // Add Choice buttons to the page
+//             for(var i=0; i < arrChoices.length; i++) {
+//                 var newElement= document.createElement("button");
+//                 newElement.setAttribute("data-answer", arrChoices[i].isAnswer);
+//                 newElement.setAttribute("data-points", newQuestion.points);
+//                 newElement.textContent = arrChoices[i].text;
+//                 buttonContainer.appendChild(newElement);
+//                 // Console log the correct answer
+//                 if(arrChoices[i].isAnswer.toLowerCase() === "yes" || arrChoices[i].isAnswer.toLowerCase() === "y" || arrChoices[i].isAnswer == 1) {
+//                     console.log(`Correct Answer: \nPoints: ${newQuestion.points} \nChoice #: ${i+1} \n${arrChoices[i].text}`)
+//                 }
+//             }
+//         } else {
+//             gameEnd();
+//         }
 
-    }
-});
+//     }
+// });
 
 
-function gameEnd() {
+// function gameEnd() {
     
-    // Render Prompt field
-    promptContainer.textContent = "Thanks for taking the Quiz! Enter initials then click 'SUBMIT'";
-    console.log(`Prompt: ${promptContainer.textContent}`);
+//     // Render Prompt field
+//     promptContainer.textContent = "Thanks for taking the Quiz! Enter initials then click 'SUBMIT'";
+//     console.log(`Prompt: ${promptContainer.textContent}`);
 
 
-    // Render Input field
-    var newElement = document.createElement("input");
-    newElement.setAttribute("type", "text");
-    newElement.setAttribute("placeholder", "Enter Initials...");
-    newElement.setAttribute("name","player-name");
-    newElement.setAttribute("id","player-name");
+//     // Render Input field
+//     var newElement = document.createElement("input");
+//     newElement.setAttribute("type", "text");
+//     newElement.setAttribute("placeholder", "Enter Initials...");
+//     newElement.setAttribute("name","player-name");
+//     newElement.setAttribute("id","player-name");
 
-    buttonContainer.appendChild(newElement);
+//     buttonContainer.appendChild(newElement);
     
     
     
-    // Render SUBMIT button
-    var newElement = document.createElement("button");
-    newElement.setAttribute("data-answer", "end");    // Submit button
-    newElement.setAttribute("data-points", "0");    // However, no points for starting the quiz...lol
-    newElement.setAttribute("style", "font-size:3rem"); // only updates this singular button element and not future buttons
-    newElement.textContent = "SUBMIT";
+//     // Render SUBMIT button
+//     var newElement = document.createElement("button");
+//     newElement.setAttribute("data-answer", "end");    // Submit button
+//     newElement.setAttribute("data-points", "0");    // However, no points for starting the quiz...lol
+//     newElement.setAttribute("style", "font-size:3rem"); // only updates this singular button element and not future buttons
+//     newElement.textContent = "SUBMIT";
 
-    buttonContainer.appendChild(newElement);
-
-
-    // Record score -- this will store the scores in order of which they were recieved
-    var playerEntry = {name:"BKN--69", score:playerScore};
-    highScores.push(playerEntry);  // local array
-    localStorage.setItem('highScores', JSON.stringify(highScores));
-    playerScore = 0; // Reset the global playerScore for the next game
+//     buttonContainer.appendChild(newElement);
 
 
-
-
-
-
-    // // Initialize Start prompt and button
-    // var promptText = "Thanks for taking the Quiz! Click 'START' to re-take the Quiz.";
-    // initializeStart(promptText);
+//     // Record score -- this will store the scores in order of which they were recieved
+//     var playerEntry = {name:"BKN--69", score:playerScore};
+//     highScores.push(playerEntry);  // local array
+//     localStorage.setItem('highScores', JSON.stringify(highScores));
+//     playerScore = 0; // Reset the global playerScore for the next game
 
 
 
 
 
-    // // Log scores to highScores local storage
-    // var playerEntry = {name:"BKN29", score:2500};
 
-    // highScores = JSON.parse(localStorage.getItem('highScores'));    // Defined in data.js, duplicated here for readability 
+//     // // Initialize Start prompt and button
+//     // var promptText = "Thanks for taking the Quiz! Click 'START' to re-take the Quiz.";
+//     // initializeStart(promptText);
 
-    // // highScores += playerEntry;
-    // highScores.push(playerEntry);
 
-    // localStorage.setItem('highScores', JSON.stringify(highScores));
-    // highScores2 = JSON.parse(localStorage.getItem('highScores'));    // Defined in data.js, duplicated here for readability 
+
+
+
+//     // // Log scores to highScores local storage
+//     // var playerEntry = {name:"BKN29", score:2500};
+
+//     // highScores = JSON.parse(localStorage.getItem('highScores'));    // Defined in data.js, duplicated here for readability 
+
+//     // // highScores += playerEntry;
+//     // highScores.push(playerEntry);
+
+//     // localStorage.setItem('highScores', JSON.stringify(highScores));
+//     // highScores2 = JSON.parse(localStorage.getItem('highScores'));    // Defined in data.js, duplicated here for readability 
 
 
 
     
-}
+// }
 
 
-function initializeStart(promptText = "Click 'START' to begin the Quiz") {
+// function initializeStart(promptText = "Click 'START' to begin the Quiz") {
     
-    // Initialize Start prompt and button
-    promptContainer.textContent = promptText;
-    console.log(`Prompt: ${promptContainer.textContent}`);
+//     // Initialize Start prompt and button
+//     promptContainer.textContent = promptText;
+//     console.log(`Prompt: ${promptContainer.textContent}`);
 
-    var newElement= document.createElement("button");
-    newElement.setAttribute("data-answer", "start");    // Start button ... used to disable header button
-    newElement.setAttribute("data-points", "0");    // However, no points for starting the quiz...lol
-    newElement.setAttribute("style", "font-size:3rem"); // only updates this singular button element and not future buttons
-    newElement.textContent = "START";
+//     var newElement= document.createElement("button");
+//     newElement.setAttribute("data-answer", "start");    // Start button ... used to disable header button
+//     newElement.setAttribute("data-points", "0");    // However, no points for starting the quiz...lol
+//     newElement.setAttribute("style", "font-size:3rem"); // only updates this singular button element and not future buttons
+//     newElement.textContent = "START";
 
-    buttonContainer.appendChild(newElement);
+//     buttonContainer.appendChild(newElement);
 
-    // Enable the High Scores Button
-    headerButton.disabled = false;
+//     // Enable the High Scores Button
+//     headerButton.disabled = false;
 
-    // Shuffle the initial Questions array to randomize the Questions order using the Durstenfeld shuffle algorithm --> Source: (Stack Overflow - See post by Laurens Holst and edited by ashleedawg) --> [How To Randomly Shuffle a JavaScript Array - Durstenfeld Shuffle](https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array)
-    arrQuestions = initQuestions.slice(0);
-    for(var i = arrQuestions.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = arrQuestions[i];
-        arrQuestions[i] = arrQuestions[j];
-        arrQuestions[j] = temp;
-    }
+//     // Shuffle the initial Questions array to randomize the Questions order using the Durstenfeld shuffle algorithm --> Source: (Stack Overflow - See post by Laurens Holst and edited by ashleedawg) --> [How To Randomly Shuffle a JavaScript Array - Durstenfeld Shuffle](https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array)
+//     arrQuestions = initQuestions.slice(0);
+//     for(var i = arrQuestions.length - 1; i > 0; i--) {
+//         var j = Math.floor(Math.random() * (i + 1));
+//         var temp = arrQuestions[i];
+//         arrQuestions[i] = arrQuestions[j];
+//         arrQuestions[j] = temp;
+//     }
 
-}
-initializeStart();
+// }
+// initializeStart();
 
 
 /*
