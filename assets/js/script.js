@@ -12,7 +12,7 @@ var playerName = "";
 
 let gameState = "start";  // start || active || end
 var iconState = true;  // correct := true, wrong := false
-var isCorrectState = false;
+var isClickedState = false; // to monitor the correct/incorrect icons
 var arrQuestions = []; // seed the arrQuestions to be manipulate, maintain a single source of truht with initQuestions
 const quizTimeLength = 20;
 var secondsLeft = quizTimeLength;
@@ -31,6 +31,7 @@ function setTime() {
         secondsLeft--;
         subHeaderEl.textContent = [secondsLeft] + "  Seconds Remaining";
 
+        // If no time remaining go to end of game state
         if(secondsLeft === 0 || gameState === "end") {
             // Stops execution of action at set interval and reset timer
             clearInterval(timerInterval);
@@ -40,9 +41,12 @@ function setTime() {
             renderMainContainer();
         } 
 
-        // Add case to show icon for 1 second
-
-        // Add case to remove time when incorrect
+        // if button was clicked keep the icon showing for up to two seconds
+        if(isClickedState) {
+            isClickedState = false;
+        } else {
+            iconContainer.setAttribute("class", "");
+        }
 
     }, 1000);
 }
@@ -195,12 +199,13 @@ buttonContainer.addEventListener("click", function(event){
         if(isAnswer == 1 || isAnswer === true || isAnswer == "true"){
             playerScore += (points * 1);
             iconContainer.setAttribute("class", "fa fa-check-circle");
-            isCorrectState = true;
+            isClickedState = true;
             console.log(`Correct! \nPlayer Total Score: ${playerScore}`);
 
         } else {
             iconContainer.setAttribute("class", "fa fa-times-circle");
-            isCorrectState = false;
+            isClickedState = true;
+            secondsLeft = (secondsLeft - 10);
             console.log(`Wrong Answer \nPlayer Total Score: ${playerScore}`);
         }
 
