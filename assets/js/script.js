@@ -16,7 +16,7 @@ var arrQuestions;
 
 
 headerButton.addEventListener("click", function(){
-    alert("You clicked the header button!!");
+    // alert("You clicked the header button!!");
 });
 
 //
