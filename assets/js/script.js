@@ -37,7 +37,13 @@ buttonContainer.addEventListener("click", function(event){
             iconContainer.setAttribute("class", "fa fa-check-circle");
             console.log(`Correct! \nPlayer Total Score: ${playerScore}`);
             // Disable header button when start has been selected
-            if(isAnswer.toLowerCase() === "start"){ headerButton.disabled = true;}
+            if(isAnswer.toLowerCase() === "start"){ 
+                headerButton.disabled = true;
+            } else if (isAnswer.toLowerCase() === "end"){
+                // Initialize Start prompt and button
+                var promptText = "Thanks for taking the Quiz! Click 'START' to re-take the Quiz.";
+                initializeStart(promptText);
+            }
 
         } else {
             iconContainer.setAttribute("class", "fa fa-times-circle");
@@ -91,19 +97,32 @@ buttonContainer.addEventListener("click", function(event){
 function gameEnd() {
     
     // Input and button to trigger capture
+    promptContainer.textContent = "Enter initials then click 'SUBMIT'";
+    console.log(`Prompt: ${promptContainer.textContent}`);
 
+    var newElement= document.createElement("button");
+    newElement.setAttribute("data-answer", "end");    // Submit button ... used to disable header button
+    newElement.setAttribute("data-points", "0");    // However, no points for starting the quiz...lol
+    newElement.setAttribute("style", "font-size:3rem"); // only updates this singular button element and not future buttons
+    newElement.textContent = "SUBMIT";
+
+    buttonContainer.appendChild(newElement);
 
 
     // Record score -- this will store the scores in order of which they were recieved
-    var playerEntry = {name:"BKN--7", score:playerScore};
+    var playerEntry = {name:"BKN--69", score:playerScore};
     highScores.push(playerEntry);  // local array
     localStorage.setItem('highScores', JSON.stringify(highScores));
     playerScore = 0; // Reset the global playerScore for the next game
 
 
-    // Initialize Start prompt and button
-    var promptText = "Thanks for taking the Quiz! Click 'START' to re-take the Quiz.";
-    initializeStart(promptText);
+
+
+
+
+    // // Initialize Start prompt and button
+    // var promptText = "Thanks for taking the Quiz! Click 'START' to re-take the Quiz.";
+    // initializeStart(promptText);
 
 
 
