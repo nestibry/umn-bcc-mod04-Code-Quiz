@@ -32,7 +32,7 @@ function setTime() {
         subHeaderEl.textContent = [secondsLeft] + "  Seconds Remaining";
 
         // If no time remaining go to end of game state
-        if(secondsLeft === 0 || gameState === "end") {
+        if(secondsLeft <= 0 || gameState === "end") {
             // Stops execution of action at set interval and reset timer
             clearInterval(timerInterval);
             subHeaderEl.textContent = "";
