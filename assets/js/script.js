@@ -14,7 +14,7 @@ let gameState = "start";  // start || active || end
 var iconState = true;  // correct := true, wrong := false
 var isClickedState = false; // to monitor the correct/incorrect icons
 var arrQuestions = []; // seed the arrQuestions to be manipulate, maintain a single source of truht with initQuestions
-const quizTimeLength = 20;
+const quizTimeLength = 100;
 var secondsLeft = quizTimeLength;
 subHeaderEl.textContent = secondsLeft + "  Seconds Remaining";
 
