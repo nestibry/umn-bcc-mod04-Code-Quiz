@@ -42,7 +42,7 @@ Figure: High Scores Example
 ## Credits
 [How To Randomly Shuffle a JavaScript Array - Durstenfeld Shuffle](https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array) -  (Source Stack Overflow - See post by Laurens Holst and edited by ashleedawg)
 
-© 2023 edX Boot Camps LLC.
+© 2023 edX Boot Camps LLC. (and for the coding quiz questions)
 
 ## License
 
