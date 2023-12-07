@@ -14,7 +14,7 @@ N/A
 
 ## Usage
 
-Deployed Site: https://nestibry.github.io/umn-bcc-mod04-code-quiz/
+Deployed Site: https://nestibry.github.io/umnbc-mod04-code-quiz/
 
 Coding Quiz Page: 
 - HTML: index.html
